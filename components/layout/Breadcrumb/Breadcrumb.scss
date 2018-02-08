@@ -1,0 +1,16 @@
+@import "~assets/scss/base/main";
+#Breadcrumb {
+  background: #fff;
+  padding: 16px 13px;
+  .el-breadcrumb__item {
+    .el-breadcrumb__inner {
+      color: lx-core-font-color;
+      font-weight:normal;
+    }
+    &:last-child {
+      .el-breadcrumb__inner {
+        color: $lx-core-color;
+      }
+    }
+  }
+}

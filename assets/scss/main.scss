@@ -1,0 +1,36 @@
+@import "base/main";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.pch-page-container {
+  .pch-container {
+    box-sizing: border-box;
+    position: fixed;
+    display: block;
+    width: 100%;
+    z-index: 20;
+    box-shadow: 0 2px 1px 1px rgba(100, 100, 100, 0.1);
+    transition: padding .3s;
+    min-height: 100vh;
+    padding: $header-height-base+10px 10px 10px 210px;
+    background: $lx-core-bg-color;
+    .pch-main-container {
+      .container {
+        margin:10px 0 0 0;
+      }
+    }
+  }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity .5s;
+}
+
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
