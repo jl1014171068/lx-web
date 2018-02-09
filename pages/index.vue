@@ -17,6 +17,7 @@
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey">GitHub</a>
+          <a href="/enter/group/base">去哪里？</a>
       </div>
     </div>
   </section>

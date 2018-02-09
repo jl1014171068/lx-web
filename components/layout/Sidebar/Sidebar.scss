@@ -1,20 +1,33 @@
 @import "~assets/scss/base/main";
-#sidebar{
-	width: 200px; overflow: auto;
-	height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 21;
-    transition: width .3s;
-    background:#fff;
-    .logo-con{
-    	text-align:center;
-    	line-height: $header-height-base;
-    	height: $header-height-base;
-    	img{
-    		max-height:100%;
-    		max-width:100%;
-    	}
+#sidebar {
+  width: 200px;
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 21;
+  transition: width .3s;
+  background: #fff;
+  .logo-con {
+    text-align: center;
+    height: $header-height-base;
+    line-height: $header-height-base;
+    img {
+      vertical-align: middle;
+      max-height: 100%;
+      max-width: 100%;
+      display: inline;
+      font-size: 0;
     }
+  }
+  .el-aside {
+    .el-menu {
+      .el-menu-item {
+      	&.is-active{
+      		color:$lx-core-color;
+      	}
+      }
+    }
+  }
 }

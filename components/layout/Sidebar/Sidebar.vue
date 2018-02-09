@@ -4,7 +4,7 @@
       <img src="~assets/img/common/admin-logo.png"  alt="">
     </div>
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['4']">
+      <el-menu :default-openeds="['4']" :default-active="activeIndex" >
         <el-submenu index="1">
           <template slot="title"><i class="lx-iconfont">&#xe603;</i>
           产品管理</template>
@@ -44,3 +44,18 @@ export default {}
 @import "./Sidebar.scss"
 
 </style>
+
+<script>
+  export default {
+    data() {
+      return {
+        activeIndex: '4-1',
+      };
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  }
+</script>
