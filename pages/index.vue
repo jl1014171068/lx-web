@@ -1,37 +1,43 @@
 <template>
   <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        pingchang-v2
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-          <a href="/enter/group/base">去哪里？</a>
-      </div>
-    </div>
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <el-card class="box-card">
+          <div v-for="o in 4" :key="o" class="text item">
+            {{'列表内容 ' + o }}
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="12">
+        <el-card class="box-card">
+          <div v-for="o in 4" :key="o" class="text item">
+            {{'列表内容 ' + o }}
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span='24'>
+        <el-card class="box-card">
+          <img src="~/assets/img/admin-advert.png" alt="">
+        </el-card>
+      </el-col>
+    </el-row>
   </section>
 </template>
-
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-
+import SidebarConfig from '~/config/sidebar.config'
 export default {
-  components: {
-    AppLogo
-  }
+  created() {
+    // console.log(SidebarConfig)
+  },
+  components: {},
+  layout: 'home'
 }
-</script>
 
+</script>
 <style>
+.box-card {
+  margin-bottom: 10px;
+}
 </style>

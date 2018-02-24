@@ -44,7 +44,7 @@ module.exports = {
     HOST: '127.0.0.1',
     PORT: '3333'
   },
-  plugins: ['~plugins/axios', '~plugins/element'],
+  plugins: ['~plugins/axios', '~plugins/element','~plugins/global'],
   router: {
     // middleware: ['auth']
   }

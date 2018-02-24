@@ -18,8 +18,9 @@ body {
     padding: $header-height-base+10px 10px 10px 210px;
     background: $lx-core-bg-color;
     .pch-main-container {
+      padding:0 10px;
       .container {
-        margin:10px 0 0 0;
+        /*margin:10px 0 0 0;*/
       }
     }
   }
@@ -34,3 +35,4 @@ body {
 .page-leave-active {
   opacity: 0;
 }
+

@@ -1,10 +1,9 @@
 <template>
   <div id="Breadcrumb">
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }">平常金服</el-breadcrumb-item>
+      <el-breadcrumb-item>{{breadcumbList.node.name}}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{breadcumbList.parentNode.name}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -13,7 +12,16 @@
 
 </style>
 <script>
+import SidebarConfig from '~/config/sidebar.config'
+import utils from '~/utils/index'
+
+
 export default {
+  data() {
+    return {
+      breadcumbList: []
+    }
+  },
   created() {
     this.getBreadcrumb()
   },
@@ -21,10 +29,7 @@ export default {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => item.name)
       const first = matched[0]
-      // if (first && first.name !== 'dashboard') {
-      //   matched = [{ path: '/dashboard', meta: { title: 'dashboard' } }].concat(matched)
-      // }
-      console.log(matched);
+      this.breadcumbList = utils.recrysuve(SidebarConfig, first.path, 'path', 'menu')[0]
     }
   }
 }
