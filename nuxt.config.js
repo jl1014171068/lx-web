@@ -21,7 +21,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    // vendor: ['axios'],
+    vendor: ['axios'],
     /*
      ** Run ESLint on save
      */
@@ -44,7 +44,10 @@ module.exports = {
     HOST: '127.0.0.1',
     PORT: '3333'
   },
-  plugins: ['~plugins/axios', '~plugins/element','~plugins/global'],
+  plugins: ['~plugins/axios', '~plugins/element', '~plugins/global'],
+  proxy: [
+    ['/lianxinApi', { target: 'http://www1.pingchang666.com:8098' }]
+  ],
   router: {
     // middleware: ['auth']
   }

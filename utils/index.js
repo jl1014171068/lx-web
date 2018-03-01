@@ -14,11 +14,18 @@ function recrysuve(json, nodeId, key, objName) {
   let node = null,
     zc = null,
     parentNode = null,
-    resultarr = [];
-  let getNode = (json, nodeId, key, objName) => {
-    for (let item of json) {
-      if (node) break;
-      if (!item || !item['' + key + '']) continue;
+    resultarr = [],
+    params = {
+      json: json,
+      nodeId: nodeId,
+      key: key,
+      objName: objName
+    };
+
+  // let getNode = (json, nodeId, key, objName) => {
+  let getNode = (params) => {
+    for (let item in params.json) {
+      if (params.node) break;
       if (item['' + key + ''] === nodeId) {
         node = item
         break;
@@ -37,18 +44,12 @@ function recrysuve(json, nodeId, key, objName) {
       node: node
     }
   }
+
   let traverseTree = (json, nodeId, key, objName) => {
-    node = null
-    parentNode = 1
-    zc = getNode(json, nodeId, key, objName);
-    if (zc.parentNode === null) return zc;
-    if (zc.parentNode) {
-      resultarr.unshift(zc)
-      traverseTree(json, zc.parentNode['' + objName + ''], key, objName)
-    }
+    getNode(params)
   }
-  traverseTree(json, nodeId, key, objName)
-  return resultarr
+
+  traverseTree(params)
 }
 
 const utils = {

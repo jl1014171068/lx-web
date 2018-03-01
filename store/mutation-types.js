@@ -1,0 +1,1 @@
+export const OUTER_APPLY_DETAIL = 'OUTER_APPLY_DETAIL';

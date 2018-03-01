@@ -5,7 +5,7 @@ const SidebarConfig = [{
     menu: [{
         name: '产品新增',
         path: '/enter/group/base1',
-        permissions: []
+        permissions: [1,2]
       },
       {
         name: '产品查询',
@@ -108,8 +108,13 @@ const SidebarConfig = [{
     path: '/outer',
     menu: [{
         name: '出账申请',
-        path: '/outer/outaccount-apply-detail',
-        permissions: []
+        path: '/outer/apply/list',
+        permissions: [],
+        menu:[{
+          name: '出账申请',
+          path: '/outer/apply/detail',
+          permissions: []
+        }]
       },
       {
         name: '角色管理',
