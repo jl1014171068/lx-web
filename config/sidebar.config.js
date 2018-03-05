@@ -113,7 +113,8 @@ const SidebarConfig = [{
         menu:[{
           name: '出账申请',
           path: '/outer/apply/detail',
-          permissions: []
+          permissions: [],
+          breadcrumb:['出账管理','出账申请']
         }]
       },
       {

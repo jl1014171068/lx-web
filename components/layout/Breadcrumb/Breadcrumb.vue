@@ -1,9 +1,8 @@
 <template>
   <div id="Breadcrumb">
-    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">平常金服</el-breadcrumb-item>
-      <!-- <el-breadcrumb-item>{{breadcumbList.node.name}}</el-breadcrumb-item> -->
-      <!-- <el-breadcrumb-item>{{breadcumbList.parentNode.name}}</el-breadcrumb-item> -->
+      <el-breadcrumb-item v-for="(item,index) in breadcumbList" :key='index' >{{item}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -19,7 +18,7 @@ import utils from '~/utils/index'
 export default {
   data() {
     return {
-      breadcumbList: []
+      breadcumbList: null
     }
   },
   created() {
@@ -29,11 +28,10 @@ export default {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => item.name)
       const first = matched[0]
-      // const first = {
-      //   path:'/outer/outaccount-apply-detail' 
-      // }
-      this.breadcumbList = utils.recrysuve(SidebarConfig, first.path, 'path', 'menu')
-      // this.breadcumbList = utils.recrysuve(SidebarConfig, first.path, 'path', 'menu')[0]
+      console.log(this.$route)
+      let data = utils.recrysuve(SidebarConfig, first.path, 'path', 'menu', 'breadcrumb')[0]
+      let result = data.speArray.length ? data.speArray : [data.node.name, data.parentNode.name]
+      this.breadcumbList = Array.from(new Set(result))
     }
   }
 }

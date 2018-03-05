@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <script>
+  const SidebarConfig = [{
+      name: '产品管理',
+      unicode: '&#xe65b;',
+      path: '/enter/group',
+      menu: [{
+          name: '产品新增',
+          path: '/enter/group/base1',
+          permissions: [1, 2]
+        },
+        {
+          name: '产品查询',
+          path: '/enter/group/base2',
+          permissions: []
+        },
+        {
+          name: '产品计算器',
+          path: '/enter/group/base3',
+          permissions: []
+        }
+      ]
+    },
+    {
+      name: '审核审查管理',
+      unicode: '&#xe643;',
+      path: '/enter/channel',
+      menu: [{
+          name: '审核审查',
+          path: '/enter/group/base4',
+          permissions: []
+        },
+        {
+          name: '汽车贷款',
+          path: '/enter/group/base5',
+          permissions: []
+        },
+        {
+          name: '审核集团',
+          path: '/enter/group/base6',
+          permissions: []
+        },
+        {
+          name: '审核经销商',
+          path: '/enter/group/base7',
+          permissions: []
+        },
+        {
+          name: '审核展厅',
+          path: '/enter/group/base8',
+          permissions: []
+        }
+      ]
+    },
+    {
+      name: '贷款管理',
+      unicode: '&#xe643;',
+      path: '/enter/channel2',
+      menu: [{
+          name: '贷款管理',
+          path: '/enter/group/base9',
+          permissions: []
+        },
+        {
+          name: '车贷申请',
+          path: '/enter/group/base10',
+          permissions: []
+        },
+        {
+          name: '车贷变更',
+          path: '/enter/group/base11',
+          permissions: []
+        },
+        {
+          name: '车贷查询',
+          path: '/enter/group/base12',
+          permissions: []
+        }
+      ]
+    },
+    {
+      name: '系统管理',
+      unicode: '&#xe643;',
+      path: '/enter/channel3',
+      menu: [{
+          name: '用户管理',
+          path: '/enter/group/base13',
+          permissions: []
+        },
+        {
+          name: '角色管理',
+          path: '/enter/group/base14',
+          permissions: []
+        },
+        {
+          name: '权限管理',
+          path: '/enter/group/base15',
+          permissions: []
+        },
+        {
+          name: '菜单管理',
+          path: '/enter/group/base16',
+          permissions: []
+        }
+      ]
+    },
+    {
+      name: '出账管理',
+      unicode: '&#xe643;',
+      path: '/outer',
+      menu: [{
+          name: '出账申请',
+          path: '/outer/apply/list',
+          permissions: [],
+          menu: [{
+            name: '出账申请',
+            path: '/outer/apply/detail',
+            permissions: [],
+            breadcrumb: ['出账管理', '出账申请'],
+            menu: [{
+            name: '出账申请22222',
+            path: '/outer/apply/detail2',
+            permissions: [],
+            breadcrumb: ['出账管理', '出账申请']
+          }]
+          }]
+        },
+        {
+          name: '角色管理',
+          path: '/enter/group/base17',
+          permissions: []
+        },
+        {
+          name: '权限管理',
+          path: '/enter/group/base18',
+          permissions: []
+        },
+        {
+          name: '菜单管理',
+          path: '/enter/group/base19',
+          permissions: []
+        }
+      ]
+    }
+  ]
+
+  /*function findParents(path, menus) {
+    var find = function(menus) {
+      var result;
+      for (let i in menus){
+      	  result = [];
+      	  if (menus[i].path == path) {
+      	  	result.push(menus[i]);
+      	  	break
+      	  }else{
+      	  	 let parent = menus[i];
+      	  	 if (parent.menu) {
+            var ret = find(parent.menu);
+            if (ret.length) {
+              result = result.concat(ret);
+              result.push(parent);
+            }
+          }
+      	  }
+      }
+      return result;
+    }
+
+    return find(menus);
+  }*/
+
+/*
+  function findParents(path, menu) {
+    let result = [];
+    // console.log(menu)
+    for (let i in menu) {
+      let value = menu[i]
+      if (value.path === path) {
+        result.push(menu[i]);
+        break
+      } else {
+        if (value.menu) {
+           findParents(path, value.menu)
+        }
+      }
+    }
+    return result
+  }
+*/
+
+
+  function findParents(path, menu) {
+  	const result = []
+  	const find = (menu) =>{
+  		for (let i in menu){
+  			let value = menu[i]
+  			if(value.path == path){
+  				result.push(value)
+  				console.log(result)
+  				break
+  			}else{
+  				if(value.menu){
+  					let ret = find(value.menu)
+  					if (ret&&ret.length) {
+                        result = result.concat(ret);
+                        result.push(parent);
+                    }
+  				}
+  			}
+  		}
+  	}
+  	return find(menu)
+  	// .map(function(menu) {
+   //      menu.menu && delete menu.menu;
+   //      return menu;
+   //  });
+  }
+
+  var c = findParents('/outer/apply/detail2',SidebarConfig)
+  // console.log(c)
+/*
+function findParents( path, menus ) {
+    var find = function(menus) {
+        var result;
+        for (var i = 0; i < menus.length; i++) {
+            result = [];
+            if (menus[i].path == path) {
+                result.push(menus[i]);
+                break;
+            } else {
+                var parent = menus[i];
+                if (parent.menu) {
+                    var ret = find(parent.menu);
+                    if (ret.length) {
+                        result = result.concat(ret);
+                        result.push(parent);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    
+    return find(menus).map(function(menu) {
+        menu.menu && delete menu.menu;
+        return menu;
+    });
+}
+
+ */
+
+  // function findParents(path, menus) {
+  //   var result;
+  //   var find = function(menus) {
+
+  //     for (var i = 0; i < menus.length; i++) {
+  //       result = [];
+  //       if (menus[i].path == path) {
+  //         result.push(menus[i]);
+  //         break;
+  //       } else {
+  //         var parent = menus[i];
+  //         if (parent.menu) {
+  //           var ret = find(parent.menu);
+  //           if (ret.length) {
+  //             result = result.concat(ret);
+  //             result.push(parent);
+  //           }
+  //         }
+  //       }
+  //     }
+  //     return result;
+  //   }
+
+  //   return find(menus).map(function(menu) {
+  //     menu.menu && delete menu.menu;
+  //     console.log(menu)
+  //     return menu;
+  //   });
+  // }
+
+
+  </script>
+</body>
+
+</html>

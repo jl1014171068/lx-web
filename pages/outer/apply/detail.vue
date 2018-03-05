@@ -75,7 +75,7 @@ export default {
   }),
   head () {
     return {
-      title: this.title,
+      title: '3213123123',
       meta: [
         { hid: 'description', name: 'description', content: 'My custom description' }
       ]
