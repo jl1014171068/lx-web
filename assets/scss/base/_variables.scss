@@ -24,18 +24,30 @@ $lx-core-lighter-color:                                     #3a3e4a !default;
 $lx-link-color:                                             #0f88eb !default;
 $lx-info-color:                                             #1aa8f0 !default;
 
+$lx-success-color: 											#67C23A !default;
+$lx-error-color: 											#F04E3F !default;
+$lx-wran-color: 											#FC9E25 !default;
 
 
 
 
 // Header 
-$header-height-base:    									68px !default;                                  
+$header-height-base:    									50px !default;                                  
 $header-avatar-base:    									42px !default;                                                
 $header-text-color:     									#fff !default;                                                                                                
+$header-logocon-height:     								77px !default;                                                                                                
+$header-logo-height:     									62px !default;                                                                                                
 
+
+// sidebar
+$sidebar-height-base:    									50px !default; 
+$sidebar-icon-size:											14px !default;
 
 //font-size
 $lx-title-font-size:     									18px !default;
+$lx-title-sub-font-size:     								14px !default;
+$lx-title-sm-font-size:     								13px !default;
+$lx-title-base-font-size:     								12px !default;
 
 
 // 间距

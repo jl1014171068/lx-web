@@ -39,9 +39,10 @@ module.exports = {
     }
   },
   css: [
-    '~/assets/scss/main.scss'
+    '~/assets/scss/main.scss',
+    '~assets/scss/components/vee-validate.scss'
   ],
-  plugins: ['~plugins/axios', '~plugins/element', '~plugins/global'],
+  plugins: ['~plugins/axios', '~plugins/element','~plugins/vee-validate', '~plugins/global'],
 
   router: {
     // middleware: ['auth']

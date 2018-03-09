@@ -11,11 +11,11 @@
   background: #fff;
   .logo-con {
     text-align: center;
-    height: $header-height-base;
-    line-height: $header-height-base;
+    height: $header-logocon-height;
+    line-height: $header-logocon-height;
     img {
       vertical-align: middle;
-      max-height: 100%;
+      max-height: $header-logo-height;
       max-width: 100%;
       display: inline;
       font-size: 0;
@@ -23,10 +23,23 @@
   }
   .el-aside {
     .el-menu {
-      .el-menu-item {
-      	&.is-active{
-      		color:$lx-core-color;
-      	}
+      .el-submenu {
+        .el-submenu__title {
+          height: $sidebar-height-base;
+          line-height: $sidebar-height-base;
+          font-size:$lx-title-sub-font-size;
+          i{
+            font-size:$sidebar-icon-size;
+          }
+        }
+        .el-menu-item {
+          height: $sidebar-height-base;
+          line-height: $sidebar-height-base;
+          font-size:$lx-title-sm-font-size;
+          &.is-active {
+            color: $lx-core-color;
+          }
+        }
       }
     }
   }
