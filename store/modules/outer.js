@@ -17,7 +17,7 @@ export default {
   actions: {
     getOuterApplyDetail({ commit }) {
       api.fetchList().then((res) => {
-        commit(types.OUTER_APPLY_DETAIL, res.data)
+        commit(types.OUTER_APPLY_DETAIL, res.list)
       })
     }
   }

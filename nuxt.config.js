@@ -6,8 +6,10 @@ module.exports = {
     title: 'pingchang-v2',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { 'http-equiv': 'pragma', content: 'no-cache' },
+      { 'http-equiv': 'cache-control', content: 'no-cache' },
+      { 'http-equiv': 'expires', content: '0' },
+      { content: 'telephone=no', name: 'format-detection' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -39,15 +41,8 @@ module.exports = {
   css: [
     '~/assets/scss/main.scss'
   ],
-  env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3333',
-    HOST: '127.0.0.1',
-    PORT: '3333'
-  },
   plugins: ['~plugins/axios', '~plugins/element', '~plugins/global'],
-  proxy: [
-    ['/lianxinApi', { target: 'http://www1.pingchang666.com:8098' }]
-  ],
+
   router: {
     // middleware: ['auth']
   }

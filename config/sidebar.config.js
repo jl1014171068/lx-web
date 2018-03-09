@@ -5,7 +5,7 @@ const SidebarConfig = [{
     menu: [{
         name: '产品新增',
         path: '/enter/group/base1',
-        permissions: [1,2]
+        permissions: [1, 2]
       },
       {
         name: '产品查询',
@@ -110,11 +110,11 @@ const SidebarConfig = [{
         name: '出账申请',
         path: '/outer/apply/list',
         permissions: [],
-        menu:[{
+        menu: [{
           name: '出账申请',
           path: '/outer/apply/detail',
           permissions: [],
-          breadcrumb:['出账管理','出账申请']
+          breadcrumb: ['出账管理', '出账申请']
         }]
       },
       {
@@ -130,6 +130,20 @@ const SidebarConfig = [{
       {
         name: '菜单管理',
         path: '/enter/group/base19',
+        permissions: []
+      }
+    ]
+  }, {
+    name: '资方管理',
+    unicode: '&#xe643;',
+    path: '/lender',
+    menu: [{
+        name: '资方查询',
+        path: '/lender/list',
+        permissions: []
+      }, {
+        name: '资方开户',
+        path: '/lender/add',
         permissions: []
       }
     ]

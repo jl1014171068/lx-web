@@ -19,6 +19,7 @@
 </template>
 <style lang="scss">
 @import "./Sidebar.scss"
+
 </style>
 <script>
 import SidebarConfig from '~/config/sidebar.config'
@@ -31,18 +32,22 @@ export default {
     return {
       activeIndex: this.$route.path,
       defaultIndex: ['4'],
-      SidebarData: SidebarConfig
+      SidebarData: SidebarConfig,
+      // breadcumbList: null
     };
+  },
+  mounted() {
+    // this.$store.commit('BREADCUMB_LIST','fsfs')
   },
   methods: {
     onSelect(index, indexPath) {
-      console.log(index, indexPath);
       this.goPage(index);
+      // this.getBreadcrumb()
     },
     goPage(url) {
       this.$router.push(url)
     }
+    }
   }
-}
 
 </script>

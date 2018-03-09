@@ -5,6 +5,11 @@ body {
   padding: 0;
 }
 
+html{
+  // font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font:12px/1.5 PingFangSC,"PingFang SC","Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;
+}
+
 .pch-page-container {
   .pch-container {
     box-sizing: border-box;
@@ -17,7 +22,11 @@ body {
     padding: $header-height-base+10px 10px 10px 210px;
     background: $lx-core-bg-color;
     .pch-main-container {
-      padding:0 10px;
+      padding:0 $lx-default-space;
+      .layout-container{
+        background-color: $lx-much-bg-color;
+        padding:0 $lx-core-space;
+      }
       .container {
         /*margin:10px 0 0 0;*/
       }
