@@ -11,9 +11,8 @@
     </div>
   </div>
 </template>
-<style lang="scss">
+<style lang="scss" >
 @import "./title-field.scss"
-
 </style>
 <script>
 export default {

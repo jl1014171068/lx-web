@@ -18,7 +18,8 @@ module.exports = {
   /*
    ** Customize the progress bar color
    */
-  loading: { color: '#3B8070' },
+  // loading: { color: '#3B8070' },
+  loading: '~/components/layout/loading/loading.vue',
   /*
    ** Build configuration
    */
@@ -39,11 +40,10 @@ module.exports = {
     }
   },
   css: [
-    '~/assets/scss/main.scss',
+    '~assets/scss/main.scss',
     '~assets/scss/components/vee-validate.scss'
   ],
-  plugins: ['~plugins/axios', '~plugins/element','~plugins/vee-validate', '~plugins/global'],
-
+  plugins: ['~plugins/axios', '~plugins/element', '~plugins/vee-validate', '~plugins/global'],
   router: {
     // middleware: ['auth']
   }

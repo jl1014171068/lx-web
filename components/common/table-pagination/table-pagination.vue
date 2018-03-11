@@ -1,6 +1,6 @@
 <template>
   <div class='table-pagination'>
-    <el-table :data="sourceData" border>
+    <el-table :data="sourceData"  style="width: 100%" class='pch-table' stripe>
       <slot></slot>
     </el-table>
     <el-pagination @size-change="handleSizeChange" @current-change="handleIndexChange" :page-size="pageSize" :page-sizes="[10, 20, 50]" :current-page="pageIndex" layout="total,sizes, prev, pager, next,jumper" :total="sourceTotal"></el-pagination>

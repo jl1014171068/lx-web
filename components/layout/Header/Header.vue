@@ -29,6 +29,6 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 @import "./Header.scss"
 </style>

@@ -17,7 +17,7 @@
     </el-aside>
   </div>
 </template>
-<style lang="scss">
+<style lang="scss" >
 @import "./Sidebar.scss"
 
 </style>

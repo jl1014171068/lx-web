@@ -168,6 +168,56 @@ export default {
 
 // /store/index.js引入并命名/modules/下面的文件
 ```
+### vee-validate
+```
+//页面内
+const dictionary = {
+  zh_CN: {
+    custom:{
+      lender:{
+        type:{
+          required: () => '类型不能为空'
+        }
+      }
+    },
+    messages: {
+      lender: {
+        code: () => 'ssss',
+      }
+    },
+    attributes: {
+      lender: {
+        code: '资方编码'
+      }
+    }
+  }
+};
+
+Validator.localize(dictionary);
+
+//vue
+<p>
+	<input v-validate="'required|sss'" name="sss" type="text" placeholder="sss">
+	<span v-show="errors.has('sss')">{{ errors.first('sss') }}</span>
+</p>
+
+//公用
+Validator.extend('sss', {
+  getMessage: field =>  field + '必须是一个手机号.',
+  validate: value =>  {return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)}
+});
+
+//按钮触发
+onSubmit() {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          console.log('ok?')
+          return;
+        }
+        console.log('咋啦');
+      });
+}      
+```
 
 ##### 常规上线步骤
 * npm run build编译后将文件传至服务器ssh ubuntu@118.25.10.254

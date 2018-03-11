@@ -28,6 +28,11 @@ $lx-success-color: 											#67C23A !default;
 $lx-error-color: 											#F04E3F !default;
 $lx-wran-color: 											#FC9E25 !default;
 
+// 表格th
+$lx-table-th-color:											#f8f6f7 !default;
+// $lx-table-th-color:											#faf8f9 !default;
+$lx-table-border-color:										#ebeef5 !default;
+
 
 
 
@@ -53,5 +58,10 @@ $lx-title-base-font-size:     								12px !default;
 // 间距
 
 // 左右间距
+$lx-big-space:     										 	20px !default;
 $lx-core-space:     										15px !default;
 $lx-default-space:     										10px !default;
+
+
+// 圆角尺寸
+$lx-core-radius:											3px  !default;

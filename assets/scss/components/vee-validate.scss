@@ -1,4 +1,4 @@
-@import "~assets/scss/base/main";
+@import "~assets/scss/base/_base";
 
 .is-danger {
   color: $lx-error-color;
@@ -9,12 +9,13 @@
   &.help {
     padding: 4px 0 0 0;
     line-height: 1;
+    left: 130px;
   }
   .el-input__inner,
   .el-input__inner:focus,
   .el-textarea__inner,
   .el-textarea__inner:focus {
-    border-color: $lx-error-color;
+    border-color: $lx-error-color !important;
   }
 }
 
