@@ -1,4 +1,6 @@
-# pingchang-v2
+# pingchang-v2（贷中erp）
+
+## Build Setup
 
 > Nuxt.js project
 
@@ -20,3 +22,178 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+
+
+# 相关技术/组件
+### webpack
+* https://webpack.github.io/
+* https://webpack.js.org/
+* https://doc.webpack-china.org/
+* http://zhaoda.net/webpack-handbook/configuration.html
+
+### sass
+* https://www.w3cplus.com/sassguide/
+* http://sass.bootcss.com/
+* https://www.sass.hk/
+
+### 其他部分插件
+* [vee-validate,验证组件](http://vee-validate.logaretm.com/index.html#about)
+* [vue-i18n,全球化](https://github.com/kazupon/vue-i18n)
+
+## Directory
+
+```
+│  .babelrc           babel配置
+│  .editorconfig
+│  .eslintignore  
+│  .eslintrc.js       eslintrc配置
+│  .gitignore
+│  package.json
+│  README.md
+│  nuxt.config.js  nuxt项目总配置
+│
+├─.nuxt                打包生成文件，用以线上部署   │  
+├─dist                 打包生成文件，用以线上静态部署
+│
+│
+├─api          公用请求存放 
+│ 
+├─assets       sass\js\css引用方式为～/assets 
+│ 
+├─components   
+   ├─ common 公用组件模块 
+   ├─ layout 公用布局组件模块
+│
+│
+├─config       公用配置模块 
+│
+│
+└─components   
+   ├─ common 公用组件模块 
+   ├─ layout 公用布局组件模块
+│
+│
+├─layouts    nuxt项目布局目录 │
+│
+├─middles    nuxt中间件目录 
+│
+│
+├─pages      nuxt页面目录 
+│
+│
+├─plugins    nuxt插件目录 
+│
+│
+├─static     nuxt静态文件目录 引用方式为/logo.png 项目启动会自动static映射为‘/’下 
+│
+│
+└─store   
+   ├─ common  公用vuex部分 
+   ├─ modules 模块化vuex
+│
+│
+├─test     自己建立用来写测试文件
+│
+│
+└─utils  工具目录
+```
+## 代码规范
+
+### css部分
+* 所有sass文件引入@import "base/main";
+* 定义通用字体大小、颜色、按钮尺寸等_variables
+* 定义所有继承_mixin
+* 超过三次引用尽量公用
+* [css代码规范](http://zhibimo.com/read/Ashu/front-end-style-guide/css/structure.html)
+
+### vue/js部分
+#### /components
+* /common/table-pagination表格分页
+```
+<elTablePage :params="params" url="/lender/search">
+      <el-table-column prop="code" width="250" label="资金方编码"></el-table-column>
+</elTablePage>    
+/pages/lender/list.vue
+
+```
+* /common/title-field标题栏目公用
+```
+<titleField>
+    <h1 slot='title' class="leg-text">标题</h1>
+    <div slot='con'>内容</div>
+</titleField> 
+一个模块一个标题形式
+```
+
+### axios
+```
+// /api/index.js
+import request from '@/plugins/axios'
+const api = {
+  // 资方列表
+  async fetchLenderList(params) {
+    let { data } = await request.get('/lender/search',params)
+    return data
+  },
+  // 出账列表
+  async  fetchList(params) {
+    let { data } = await request.get('/outaccount/apply/detail',params)
+    return data
+  }
+}
+export default api
+```
+```
+// /store/modules/xxx.js
+import Vue from 'vue'
+import api from '@/api'
+import * as types from '@/store/mutation-types'
+export default {
+  state: {
+     lists: []
+  },
+  mutations: {
+    LENDER_LIST(state, data) {
+      state.lists = data
+    }
+  },
+  actions: {
+    getLenderList({ commit },parames) {
+      api.fetchLenderList().then((res) => {
+        commit(types.LENDER_LIST, res.list)
+      })
+    }
+  }
+}
+
+// /store/index.js引入并命名/modules/下面的文件
+```
+
+##### 常规上线步骤
+* npm run build编译后将文件传至服务器ssh ubuntu@118.25.10.254
+* 服务器目录为/home/nuxt （需要上传的未见为package.json和.nuxt文件）
+* 安装好node（推荐nvm）和 yarn，npm i --production 或者yarn i --production 安装好后运行npm run start启动服务
+* 需要配置好nginx(ubuntu下的配置为：/etc/nginx/nginx.conf查看内容可以看到底部引入
+include/etc/nginx/conf.d/*.conf;
+include/etc/nginx/sites-enabled/*;
+进入sites-enabled目录下配置nginx的sercer代理即可
+)
+* 后面尽量改为docker一键部署或者ci方式
+
+###### 分支命名规则
+
+分支 | 命名 | 规则
+---|---|---
+主分支 | master | 主分支，所有提供给用户使用的正式版本，都在这个主分支上发布
+开发分支 | develop | 开发分支，永远是功能最新最全的分支(目前定义为第一版测试分支，经过此分支初步测试后才可以发布至每周上线分支)
+功能分支 | feature/name/branch | 新功能分支，某个功能点正在开发阶段
+发布版本 | release/name/branch | 发布定期要上线的功能
+修复分支 | bugfix/name/branch | 修复线上代码的 bug
+紧急修复分支 | hotfix/name/branch | 紧急修复线上代码的 bug
+
+###### git命令||souretree步骤
+* 首先拉取本分支代码，再将master合并至本分支，避免上线冲突
+* 解决冲突后合并至develop分支解决冲突，更新服务器代码./pull.sh操作
+* 在[jira](http://jira.yinuovip.com/browse/YINUO/?selectedTab=com.atlassian.jira.jira-projects-plugin:summary-panel)中关闭相关任务且分配至测试，且添加相关备注描述
+* 经过测试测试无误后合并至每周上线分支常规为：release/年-月-日
+
