@@ -194,6 +194,6 @@ include/etc/nginx/sites-enabled/*;
 ###### git命令||souretree步骤
 * 首先拉取本分支代码，再将master合并至本分支，避免上线冲突
 * 解决冲突后合并至develop分支解决冲突，更新服务器代码./pull.sh操作
-* 在[jira](http://jira.yinuovip.com/browse/YINUO/?selectedTab=com.atlassian.jira.jira-projects-plugin:summary-panel)中关闭相关任务且分配至测试，且添加相关备注描述
+* 在[jira]中关闭相关任务且分配至测试，且添加相关备注描述
 * 经过测试测试无误后合并至每周上线分支常规为：release/年-月-日
 
