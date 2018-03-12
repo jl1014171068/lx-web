@@ -24,7 +24,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ['axios'],
+    vendor: ['axios','v-distpicker'],
     /*
      ** Run ESLint on save
      */

@@ -45,18 +45,28 @@
                 <span v-show="errors.has('lender.cardNo')" class="help is-danger">{{ errors.first('lender.cardNo') }}</span>
               </el-form-item>
             </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="16" :xl="12">
-              <el-form-item label="营业起止日期" for="lender.bussBegin" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.bussBegin" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期" :default-time="['00:00:00', '23:59:59']" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.bussBegin') }" name="lender.bussBegin">
-                </el-date-picker>
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="营业起始日" for="lender.bussBegin" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.bussBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.bussBegin') }" name="lender.bussBegin" placeholder="营业起始日"></el-date-picker>
                 <span v-show="errors.has('lender.bussBegin')" class="help is-danger">{{ errors.first('lender.bussBegin') }}</span>
               </el-form-item>
             </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="16" :xl="12">
-              <el-form-item label="合作起止日期" for="lender.togeBegin" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.togeBegin" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期" :default-time="['00:00:00', '23:59:59']" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.togeBegin') }" name="lender.togeBegin">
-                </el-date-picker>
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="营业起始日" for="lender.bussEnd" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.bussEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.bussEnd') }" name="lender.bussEnd" placeholder="营业起始日"></el-date-picker>
+                <span v-show="errors.has('lender.bussEnd')" class="help is-danger">{{ errors.first('lender.bussEnd') }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="合作开始日" for="lender.togeBegin" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.togeBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.togeBegin') }" name="lender.togeBegin" placeholder="合作开始日"></el-date-picker>
                 <span v-show="errors.has('lender.togeBegin')" class="help is-danger">{{ errors.first('lender.togeBegin') }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="合作到期日" for="lender.togeEnd" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.togeEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.togeEnd') }" name="lender.togeEnd" placeholder="合作到期日"></el-date-picker>
+                <span v-show="errors.has('lender.togeEnd')" class="help is-danger">{{ errors.first('lender.togeEnd') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
@@ -72,10 +82,15 @@
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="注册地址" for="lender.provinceId" :class="{ 'vee-control': true }">
+              <!-- <el-form-item label="注册地址" for="lender.provinceId" :class="{ 'vee-control': true }">
                 <el-cascader v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.provinceId') }" name="lender.provinceId" :options="form.options2" @active-item-change="handleItemChange" :props="form.props"></el-cascader>
                 <span v-show="errors.has('lender.provinceId')" class="help is-danger">{{ errors.first('lender.provinceId') }}</span>
-              </el-form-item>
+              </el-form-item> -->
+              <no-ssr>
+              <v-distpicker :placeholders="form.placeholders"></v-distpicker>
+              </no-ssr>
+              <!-- <v-distpicker :province="form.select.province" :city="form.select.city" :area="form.select.area"></v-distpicker> -->
+              <!-- <area-select :level="2" v-model="form.placeholders"></area-select> -->
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="详细注册地址" for="lender.code">
@@ -131,7 +146,6 @@
           <el-dialog :visible.sync="form.dialogVisible">
             <img width="100%" :src="form.dialogImageUrl" alt="">
           </el-dialog>
-
           <el-form-item class='pch-bottom-btns'>
             <el-button class='default-md-btn' type="primary" @click="onSubmit">立即创建</el-button>
             <el-button>取消</el-button>
@@ -146,8 +160,18 @@
 
 </style>
 <script>
+import Vue from 'vue'
 import titleField from '~/components/common/title-field/title-field'
 import { Validator } from 'vee-validate'
+// import VueAreaLinkage from 'vue-area-linkage'
+// import VueAreaLinkage from 'vue-area-linkage'
+// 
+if (process.browser) {
+  var Distpicker = require('v-distpicker')
+  Vue.use(Distpicker)
+  Vue.component('v-distpicker', Distpicker)
+}
+
 const dictionary = {
   zh_CN: {
     custom: {
@@ -159,10 +183,16 @@ const dictionary = {
           required: () => '请选择证件类型'
         },
         bussBegin: {
-          required: () => '请选择营业起止日期'
+          required: () => '请选择营业起始日'
+        },
+        bussEnd: {
+          required: () => '请选择营业到期日'
         },
         togeBegin: {
-          required: () => '请选择合作起止日期'
+          required: () => '请选择合作开始日'
+        },
+        togeEnd: {
+          required: () => '请选择合作到期日'
         },
         provinceId: {
           required: () => '请选择注册地址'
@@ -218,8 +248,10 @@ export default {
         type: '',
         cardType: '',
         cardNo: '',
-        bussBegin: [],
-        togeBegin: [],
+        bussBegin: '',
+        bussEnd: '',
+        togeBegin: '',
+        togeEnd: '',
         email: '',
         regCapital: '',
         options2: [{
@@ -264,7 +296,13 @@ export default {
           zip: 200333
         }],
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        select: { province: '广东省', city: '广州市', area: '海珠区' },
+        placeholders: {
+              province: '------- 省 --------',
+              city: '--- 市 ---',
+              area: '--- 区 ---',
+          }
       }
     }
   },
@@ -316,7 +354,9 @@ export default {
     }
   },
   components: {
-    titleField
+    titleField,
+    // Distpicker:'v-distpicker'
+    // areaSelect:'area-select'
   }
 }
 
