@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VeeValidate,{Validator} from 'vee-validate';
+import VeeValidate, { Validator } from 'vee-validate';
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import VueI18n from 'vue-i18n';
 
@@ -61,10 +61,48 @@ Vue.use(VeeValidate, {
 //   }
 // });
 
+
 Validator.extend('sss', {
-  getMessage: field =>  field + '必须是一个手机号.',
-  validate: value =>  {return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)}
+  getMessage(field, args) { // 添加到默认的英文错误消息里面
+      // Returns a message.
+      return '11111'
+    },
+    validate(value, args) {
+      console.log(13123123123)
+      // Returns a Boolean or a Promise.
+    }
 });
+/*const validateRules = {
+  aaaa: {
+    getMessage: field => field + '必须是一个手机号.',
+    validate: value => { //字段校验规则
+      console.log(12313123312)
+      return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+    }
+  },
+  asd: {
+    getMessage(field, args) { // 添加到默认的英文错误消息里面
+      // Returns a message.
+      return '11111'
+    },
+    validate(value, args) {
+      console.log(13123123123)
+      // Returns a Boolean or a Promise.
+    }
+  },
+  passWord: {
+    getMessage: field => field + '必须是一个手机号.',
+    validate: value => {
+      let reg1 = /\d+/;
+      let reg2 = /[a-zA-Z]/;
+      return value.length >= 8 && value.length <= 16 && reg1.test(value) && reg2.test(value);
+    }
+  }
+}
+
+Object.keys(validateRules).forEach((key) => {
+  Validator.extend(key, validateRules[key]);
+});*/
 
 // let instance = new Validator({ trueField: 'truthy' });
 

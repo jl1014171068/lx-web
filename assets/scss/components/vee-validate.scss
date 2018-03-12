@@ -3,10 +3,12 @@
 .is-danger {
   color: $lx-error-color;
   font-size: $lx-title-base-font-size;
-  position: absolute;
-  top: 100%;
-  left: 0;
+  // position: absolute;
+  // top: 100%;
+  // left: 0;
   &.help {
+    position: absolute;
+    top: 100%;
     padding: 4px 0 0 0;
     line-height: 1;
     left: 130px;

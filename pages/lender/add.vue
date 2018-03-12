@@ -81,54 +81,79 @@
                 <span v-show="errors.has('lender.regCapital')" class="help is-danger">{{ errors.first('lender.regCapital') }}</span>
               </el-form-item>
             </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <!-- <el-form-item label="注册地址" for="lender.provinceId" :class="{ 'vee-control': true }">
-                <el-cascader v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.provinceId') }" name="lender.provinceId" :options="form.options2" @active-item-change="handleItemChange" :props="form.props"></el-cascader>
-                <span v-show="errors.has('lender.provinceId')" class="help is-danger">{{ errors.first('lender.provinceId') }}</span>
-              </el-form-item> -->
-              <no-ssr>
-              <v-distpicker :placeholders="form.placeholders"></v-distpicker>
-              </no-ssr>
-              <!-- <v-distpicker :province="form.select.province" :city="form.select.city" :area="form.select.area"></v-distpicker> -->
-              <!-- <area-select :level="2" v-model="form.placeholders"></area-select> -->
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" class='pch-area'>
+              <el-form-item label="注册地址" for="lender.area" :class="{ 'vee-control': true }">
+                <no-ssr>
+                  <v-distpicker :placeholders="form.placeholders" :province="form.lender.provinceId" :city="form.lender.cityId" :area="form.lender.areaId" @selected="changeSelect"></v-distpicker>
+                </no-ssr>
+                <input type="hidden" v-model="form.area" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="lender.area">
+                <span v-show="errors.has('lender.area')" class="help is-danger">{{ errors.first('lender.area') }}</span>
+              </el-form-item>
             </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="详细注册地址" for="lender.code">
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" class='pch-address'>
+              <el-form-item for="lender.code">
                 <el-input v-model="form.address" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.address') }" name="lender.address" type="text" placeholder="详细注册地址"></el-input>
                 <span v-show="errors.has('lender.address')" class="help is-danger">{{ errors.first('lender.address') }}</span>
               </el-form-item>
             </el-col>
+            <!--    <input placeholder="请输入手机号" v-validate="'required'" :name="`lender.contactsList${form.ccc}.utype`" v-model="form.address">
+            <span v-show="errors.has(`lender.contactsList${form.ccc}.utype`)" class="errors-tip is-danger">不能为空</span> -->
           </el-row>
         </div>
       </titleField>
       <titleField>
         <h1 slot='title' class="leg-text">联系人信息</h1>
         <div slot='con'>
-          <el-table :data="form.tableData" style="width: 100%" class='pch-table' stripe>
-            <el-table-column label="日期" width="250">
+          <el-table :data="form.contactsList" style="width: 100%" class='pch-table' stripe>
+            <el-table-column prop="utype" label="联系人类型" width="250">
               <template slot-scope="scope">
-                <el-select clearable v-model="form.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.type') }" name="lender.type">
-                  <el-option v-for="item in form.typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
-                </el-select>
-                <!--  <el-popover trigger="hover" placement="top">
-                  <p>姓名: {{ scope.row.name }}</p>
-                  <p>住址: {{ scope.row.address }}</p>
-                  <div slot="reference" class="name-wrapper">
-                    <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                  </div>
-                </el-popover> -->
+                <div :class="{ 'vee-control': true }">
+                  <el-select clearable v-model="scope.row.utype" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.utype`) }" :name="`form.contactsList${scope.row.index}.utype`">
+                    <el-option v-for="list in form.typeOption" :key="list.value" :label="list.label" :value="list.value"></el-option>
+                  </el-select>
+                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.utype`)">请选择联系人类型</span>
+                </div>
               </template>
             </el-table-column>
-            <el-table-column prop="name" label="姓名" width="220">
+            <el-table-column prop="uname" label="姓名" width="250">
+              <template slot-scope="scope">
+                <div :class="{ 'vee-control': true }">
+                  <el-select clearable v-model="scope.row.uname" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.uname`) }" :name="`form.contactsList${scope.row.index}.uname`">
+                    <el-option v-for="list in form.typeOption" :key="list.value" :label="list.label" :value="list.value"></el-option>
+                  </el-select>
+                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.uname`)">请输入姓名</span>
+                </div>
+              </template>
             </el-table-column>
-            <el-table-column prop="province" label="省份" width="220">
+            <el-table-column prop="name" label="联系电话" width="250">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.mobile" placeholder="请输入内容"></el-input>
+              </template>
             </el-table-column>
-            <el-table-column prop="city" label="市区" width="220">
+            <el-table-column prop="name" label="电子邮箱" width="250">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.email" placeholder="请输入内容"></el-input>
+              </template>
             </el-table-column>
-            <el-table-column prop="address" label="地址" width="300">
+            <el-table-column prop="name" label="备注" width="250">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.bak" placeholder="请输入内容"></el-input>
+              </template>
             </el-table-column>
-            <el-table-column prop="zip" label="邮编" width="250">
+            <el-table-column prop="name" label="是否设置管理员" width="250">
+              <template slot-scope="scope">
+                <el-checkbox-group v-model="scope.row.admin">
+                  <el-checkbox></el-checkbox>
+                </el-checkbox-group>
+              </template>
             </el-table-column>
+            <!-- <el-table-column label="日期" width="250">
+                <template slot-scope="scope">
+                  <el-select clearable v-model="form.contactsList[index].name" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.type') }" name="lender.type">
+                    <el-option v-for="item in form.typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                  </el-select>
+                </template>
+              </el-table-column> -->
             <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
@@ -163,8 +188,6 @@
 import Vue from 'vue'
 import titleField from '~/components/common/title-field/title-field'
 import { Validator } from 'vee-validate'
-// import VueAreaLinkage from 'vue-area-linkage'
-// import VueAreaLinkage from 'vue-area-linkage'
 // 
 if (process.browser) {
   var Distpicker = require('v-distpicker')
@@ -194,8 +217,11 @@ const dictionary = {
         togeEnd: {
           required: () => '请选择合作到期日'
         },
-        provinceId: {
+        area: {
           required: () => '请选择注册地址'
+        },
+        utype: {
+          required: () => '请选择联系人类型'
         }
       }
     },
@@ -221,11 +247,21 @@ const dictionary = {
 
 Validator.localize(dictionary);
 
+const tableDefault = {
+  index: 0,
+  utype: '11',
+  uname: '',
+  mobile: '',
+  email: '',
+  bak: '',
+  admin: ''
+}
 
 export default {
   data() {
     return {
       form: {
+        ccc: 1,
         code: '',
         name: '',
         shortName: '',
@@ -297,15 +333,32 @@ export default {
         }],
         dialogImageUrl: '',
         dialogVisible: false,
-        select: { province: '广东省', city: '广州市', area: '海珠区' },
+        area: '',
+        lender: {
+          provinceId: '',
+          cityId: '',
+          areaId: ''
+        },
         placeholders: {
-              province: '------- 省 --------',
-              city: '--- 市 ---',
-              area: '--- 区 ---',
-          }
+          province: '请选择省',
+          city: '请选择城市',
+          area: '请选择区',
+        },
+        contactsList: [{
+          utype: '',
+          uname: '',
+          mobile: '',
+          email: '',
+          bak: '',
+          admin: ''
+        }]
       }
     }
   },
+  created() {
+    this.addIndex()
+  },
+  mounted() {},
   methods: {
     onSubmit() {
       this.$validator.validateAll().then((result) => {
@@ -315,35 +368,18 @@ export default {
         }
         console.log('咋啦');
       });
-      // this.validator.validateAll({
-      //   email: this.email,
-      //   name: this.name
-      // }).then((result) => {
-      //   if (result) {
-      //     // eslint-disable-next-line
-      //     console.log('All is well');
-      //     return;
-      //   }
-      //   // eslint-disable-next-line
-      //   console.log('Oops!');
-      // });
-    },
-    handleItemChange(val) {
-      console.log('active item:', val);
-      setTimeout(_ => {
-        if (val.indexOf('江苏') > -1 && !this.form.options2[0].cities.length) {
-          this.form.options2[0].cities = [{
-            label: '南京'
-          }];
-        } else if (val.indexOf('浙江') > -1 && !this.form.options2[1].cities.length) {
-          this.form.options2[1].cities = [{
-            label: '杭州'
-          }];
-        }
-      }, 300);
     },
     handleClick(row) {
       console.log(row);
+      console.log(this.form);
+    },
+    changeSelect(row) {
+      console.log(row);
+      console.log(this.form)
+    },
+    indexMethod(index) {
+      console.log(index)
+      return index;
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -351,12 +387,26 @@ export default {
     handlePictureCardPreview(file) {
       this.form.dialogImageUrl = file.url;
       this.form.dialogVisible = true;
+    },
+    addIndex() {
+      this.form.contactsList.map(function(el, ind) {
+        if (el.index) delete el.index;
+        return el.index = ind
+      })
+    },
+    addRow() {
+
     }
   },
   components: {
     titleField,
     // Distpicker:'v-distpicker'
     // areaSelect:'area-select'
+  },
+  watch: {
+    'form.contactsList' (news, old) {
+      console.log(news, old)
+    }
   }
 }
 

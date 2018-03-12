@@ -35,6 +35,16 @@
                   }
                 }
               }
+              .pch-area {
+                .distpicker-address-wrapper {
+                  font-size: 0;
+                  select {
+                    width: 30%;
+                    margin-right:1%;
+                  }
+                }
+              }
+              .pch-address {}
             }
           }
         }
@@ -42,7 +52,7 @@
           &.el-table {
             th {
               background-color: $lx-table-th-color;
-              border:$lx-table-border-color solid 1px;
+              border: $lx-table-border-color solid 1px;
             }
           }
         }
@@ -53,5 +63,3 @@
     }
   }
 }
-
-
