@@ -12,88 +12,89 @@
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方名称" for="lender.name" :class="{ 'vee-control': true }">
-                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.name') }" name="lender.name" type="text" placeholder="资方名称"></el-input>
-                <span v-show="errors.has('lender.name')" class="help is-danger">{{ errors.first('lender.name') }}</span>
+              <el-form-item label="资方名称" for="name" :class="{ 'vee-control': true }">
+                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
+                <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              </el-form-item>
+            </el-col>
+
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="简称" for="shortName" :class="{ 'vee-control': true }">
+                <el-input v-model="form.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('shortName') }" name="shortName" type="text" placeholder="简称"></el-input>
+                <span v-show="errors.has('shortName')" class="help is-danger">{{ errors.first('shortName') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="简称" for="lender.shortName" :class="{ 'vee-control': true }">
-                <el-input v-model="form.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.shortName') }" name="lender.shortName" type="text" placeholder="简称"></el-input>
-                <span v-show="errors.has('lender.shortName')" class="help is-danger">{{ errors.first('lender.shortName') }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="类型" for="lender.type" :class="{ 'vee-control': true }">
-                <el-select clearable v-model="form.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.type') }" name="lender.type">
+              <el-form-item label="类型" for="type" :class="{ 'vee-control': true }">
+                <el-select clearable v-model="form.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type') }" name="type">
                   <el-option v-for="item in form.typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
-                <span v-show="errors.has('lender.type')" class="help is-danger">{{ errors.first('lender.type') }}</span>
+                <span v-show="errors.has('type')" class="help is-danger">{{ errors.first('type') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="证件类型" for="lender.cardType" :class="{ 'vee-control': true }">
-                <el-select clearable v-model="form.cardType" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.cardType') }" name="lender.cardType">
+              <el-form-item label="证件类型" for="cardType" :class="{ 'vee-control': true }">
+                <el-select clearable v-model="form.cardType" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardType') }" name="cardType">
                   <el-option v-for="item in form.typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
-                <span v-show="errors.has('lender.cardType')" class="help is-danger">{{ errors.first('lender.cardType') }}</span>
+                <span v-show="errors.has('cardType')" class="help is-danger">{{ errors.first('cardType') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="证件号码" for="lender.cardNo" :class="{ 'vee-control': true }">
-                <el-input v-model="form.cardNo" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.cardNo') }" name="lender.cardNo" type="text" placeholder="证件号码"></el-input>
-                <span v-show="errors.has('lender.cardNo')" class="help is-danger">{{ errors.first('lender.cardNo') }}</span>
+              <el-form-item label="证件号码" for="cardNo" :class="{ 'vee-control': true }">
+                <el-input v-model="form.cardNo" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardNo') }" name="cardNo" type="text" placeholder="证件号码"></el-input>
+                <span v-show="errors.has('cardNo')" class="help is-danger">{{ errors.first('cardNo') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="营业起始日" for="lender.bussBegin" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.bussBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.bussBegin') }" name="lender.bussBegin" placeholder="营业起始日"></el-date-picker>
-                <span v-show="errors.has('lender.bussBegin')" class="help is-danger">{{ errors.first('lender.bussBegin') }}</span>
+              <el-form-item label="营业起始日" for="bussBegin" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.bussBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('bussBegin') }" name="bussBegin" placeholder="营业起始日"></el-date-picker>
+                <span v-show="errors.has('bussBegin')" class="help is-danger">{{ errors.first('bussBegin') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="营业起始日" for="lender.bussEnd" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.bussEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.bussEnd') }" name="lender.bussEnd" placeholder="营业起始日"></el-date-picker>
-                <span v-show="errors.has('lender.bussEnd')" class="help is-danger">{{ errors.first('lender.bussEnd') }}</span>
+              <el-form-item label="营业起始日" for="bussEnd" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.bussEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('bussEnd') }" name="bussEnd" placeholder="营业起始日"></el-date-picker>
+                <span v-show="errors.has('bussEnd')" class="help is-danger">{{ errors.first('bussEnd') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="合作开始日" for="lender.togeBegin" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.togeBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.togeBegin') }" name="lender.togeBegin" placeholder="合作开始日"></el-date-picker>
-                <span v-show="errors.has('lender.togeBegin')" class="help is-danger">{{ errors.first('lender.togeBegin') }}</span>
+              <el-form-item label="合作开始日" for="togeBegin" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.togeBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('togeBegin') }" name="togeBegin" placeholder="合作开始日"></el-date-picker>
+                <span v-show="errors.has('togeBegin')" class="help is-danger">{{ errors.first('togeBegin') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="合作到期日" for="lender.togeEnd" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.togeEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.togeEnd') }" name="lender.togeEnd" placeholder="合作到期日"></el-date-picker>
-                <span v-show="errors.has('lender.togeEnd')" class="help is-danger">{{ errors.first('lender.togeEnd') }}</span>
+              <el-form-item label="合作到期日" for="togeEnd" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.togeEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('togeEnd') }" name="togeEnd" placeholder="合作到期日"></el-date-picker>
+                <span v-show="errors.has('togeEnd')" class="help is-danger">{{ errors.first('togeEnd') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="电子邮件" for="lender.email" :class="{ 'vee-control': true }">
-                <el-input v-model="form.email" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.email') }" name="lender.email" type="text" placeholder="电子邮件"></el-input>
-                <span v-show="errors.has('lender.email')" class="help is-danger">{{ errors.first('lender.email') }}</span>
+              <el-form-item label="电子邮件" for="email" :class="{ 'vee-control': true }">
+                <el-input v-model="form.email" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="电子邮件"></el-input>
+                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="注册资本(万美金)" for="lender.regCapital" :class="{ 'vee-control': true }">
-                <el-input v-model="form.regCapital" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.regCapital') }" name="lender.regCapital" type="text" placeholder="注册资本(万美金)"></el-input>
-                <span v-show="errors.has('lender.regCapital')" class="help is-danger">{{ errors.first('lender.regCapital') }}</span>
+              <el-form-item label="注册资本(万美金)" for="regCapital" :class="{ 'vee-control': true }">
+                <el-input v-model="form.regCapital" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('regCapital') }" name="regCapital" type="text" placeholder="注册资本(万美金)"></el-input>
+                <span v-show="errors.has('regCapital')" class="help is-danger">{{ errors.first('regCapital') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" class='pch-area'>
-              <el-form-item label="注册地址" for="lender.area" :class="{ 'vee-control': true }">
+              <el-form-item label="注册地址" for="area" :class="{ 'vee-control': true }">
                 <no-ssr>
                   <v-distpicker :placeholders="form.placeholders" :province="form.lender.provinceId" :city="form.lender.cityId" :area="form.lender.areaId" @selected="changeSelect"></v-distpicker>
                 </no-ssr>
                 <input type="hidden" v-model="form.area" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="lender.area">
-                <span v-show="errors.has('lender.area')" class="help is-danger">{{ errors.first('lender.area') }}</span>
+                <span v-show="errors.has('area')" class="help is-danger">{{ errors.first('area') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" class='pch-address'>
-              <el-form-item for="lender.code">
-                <el-input v-model="form.address" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.address') }" name="lender.address" type="text" placeholder="详细注册地址"></el-input>
-                <span v-show="errors.has('lender.address')" class="help is-danger">{{ errors.first('lender.address') }}</span>
+              <el-form-item for="address">
+                <el-input v-model="form.address" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" name="address" type="text" placeholder="详细注册地址"></el-input>
+                <span v-show="errors.has('address')" class="help is-danger">详细注册地址不能为空</span>
               </el-form-item>
             </el-col>
             <!--    <input placeholder="请输入手机号" v-validate="'required'" :name="`lender.contactsList${form.ccc}.utype`" v-model="form.address">
@@ -118,26 +119,27 @@
             <el-table-column prop="uname" label="姓名" width="250">
               <template slot-scope="scope">
                 <div :class="{ 'vee-control': true }">
-                  <el-select clearable v-model="scope.row.uname" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.uname`) }" :name="`form.contactsList${scope.row.index}.uname`">
-                    <el-option v-for="list in form.typeOption" :key="list.value" :label="list.label" :value="list.value"></el-option>
-                  </el-select>
+                  <el-input v-model="scope.row.uname" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.uname`) }" :name="`form.contactsList${scope.row.index}.uname`"></el-input>
                   <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.uname`)">请输入姓名</span>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="name" label="联系电话" width="250">
+            <el-table-column prop="mobile" label="联系电话" width="250">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.mobile" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.mobile" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.mobile`) }" :name="`form.contactsList${scope.row.index}.mobile`"></el-input>
+                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.mobile`)">请输入联系电话</span>
               </template>
             </el-table-column>
-            <el-table-column prop="name" label="电子邮箱" width="250">
+            <el-table-column prop="email" label="电子邮箱" width="250">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.email" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.email" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.email`) }" :name="`form.contactsList${scope.row.index}.email`"></el-input>
+                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.email`)">请输入电子邮箱</span>
               </template>
             </el-table-column>
-            <el-table-column prop="name" label="备注" width="250">
+            <el-table-column prop="bak" label="备注" width="250">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.bak" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.bak" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.bak`) }" :name="`form.contactsList${scope.row.index}.bak`"></el-input>
+                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.bak`)">请输入备注</span>
               </template>
             </el-table-column>
             <el-table-column prop="name" label="是否设置管理员" width="250">
@@ -147,19 +149,15 @@
                 </el-checkbox-group>
               </template>
             </el-table-column>
-            <!-- <el-table-column label="日期" width="250">
-                <template slot-scope="scope">
-                  <el-select clearable v-model="form.contactsList[index].name" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.type') }" name="lender.type">
-                    <el-option v-for="item in form.typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
-                  </el-select>
-                </template>
-              </el-table-column> -->
             <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
+          <div>
+        <el-button class='default-md-btn' type="text" size="small">删除</el-button>
+          </div>
         </div>
       </titleField>
       <titleField>
@@ -231,16 +229,14 @@ const dictionary = {
       }
     },
     attributes: {
-      lender: {
-        name: '资方名称',
-        shortName: '简称',
-        type: '类型',
-        cardType: '证件类型',
-        cardNo: '证件类型号码',
-        email: '电子邮件',
-        regCapital: '注册资本(万美金)',
-        address: '详细注册地址',
-      }
+      name: '资方名称',
+      shortName: '简称',
+      type: '类型',
+      cardType: '证件类型',
+      cardNo: '证件类型号码',
+      email: '电子邮件',
+      regCapital: '注册资本(万美金)',
+      address: '详细注册地址'
     }
   }
 };
