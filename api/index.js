@@ -5,6 +5,11 @@ const api = {
     let { data } = await request.get('/lender/search',params)
     return data
   },
+  // 资方开户
+  async postLender(data) {
+    let { result } = await request.post('/lender',data)
+    return result
+  },
   // 出账列表
   async  fetchList(params) {
     let { data } = await request.get('/outaccount/apply/detail',params)

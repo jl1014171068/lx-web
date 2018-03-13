@@ -222,7 +222,7 @@ onSubmit() {
 ##### 常规上线步骤
 * npm run build编译后将文件传至服务器ssh ubuntu@118.25.10.254
 * 服务器目录为/home/nuxt （需要上传的未见为package.json和.nuxt文件）
-* 安装好node（推荐nvm）和 yarn，npm i --production 或者yarn i --production 安装好后运行npm run start启动服务
+* 安装好node（推荐nvm）和 yarn，npm i --production 或者yarn --production 安装好后运行npm run start启动服务
 * 需要配置好nginx(ubuntu下的配置为：/etc/nginx/nginx.conf查看内容可以看到底部引入
 include/etc/nginx/conf.d/*.conf;
 include/etc/nginx/sites-enabled/*;

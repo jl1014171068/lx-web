@@ -7,6 +7,7 @@
 // Grayscale and brand colors for use across Hi.
 // logo主要颜色 
 $lx-core-color:                                             #ec9d00 !default;
+$lx-sub-color:                                              #1AA8F0 !default;
 // 主要字体颜色
 $lx-core-font-color:                                        #1B2630 !default;
 
@@ -65,3 +66,15 @@ $lx-default-space:     										10px !default;
 
 // 圆角尺寸
 $lx-core-radius:											3px  !default;
+
+// button
+$lx-btn-core-bg:											$lx-core-color;	
+$lx-btn-core-hover-bg:									    $lx-core-color;	
+$lx-btn-core-color:											#ffffff !default;	
+$lx-btn-core-hover-color:									#ffffff !default;	
+
+//保存新增按钮
+$lx-btn-sub-bg:											$lx-sub-color;	
+$lx-btn-sub-hover-bg:									    $lx-sub-color;	
+$lx-btn-sub-color:											#ffffff !default;	
+$lx-btn-sub-hover-color:									#ffffff !default;	

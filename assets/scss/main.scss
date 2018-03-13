@@ -36,15 +36,24 @@
                 }
               }
               .pch-area {
+                padding-right:0 !important;
                 .distpicker-address-wrapper {
                   font-size: 0;
                   select {
-                    width: 30%;
+                    width: 32%;
                     margin-right:1%;
                   }
                 }
               }
-              .pch-address {}
+              .pch-address {
+                padding-left:0 !important;
+                .el-form-item__content{
+                  padding:0;
+                  .help{
+                    left:0;
+                  }
+                }
+              }
             }
           }
         }
@@ -54,6 +63,29 @@
               background-color: $lx-table-th-color;
               border: $lx-table-border-color solid 1px;
             }
+            .el-table__body-wrapper{
+              padding-bottom:20px;
+            }
+          }
+           .is-danger{
+            &.help{
+              left:10px;
+              margin:-12px 0 0 0;
+              z-index:300;
+            }
+           }
+        }
+        .pch-wrap-btns{
+          margin:$lx-default-space;
+        }
+        .pch-bottom-btns{
+          padding:$lx-big-space 0;
+          // text-align:center;
+        }
+        .pch-upload-sign{
+          position: relative;
+          .help{
+            left:0;
           }
         }
       }
