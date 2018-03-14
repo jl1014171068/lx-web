@@ -42,3 +42,30 @@
 		border-color:$lx-btn-core-hover-bg;
 	}
 }
+
+.default-sm-btn{
+	background:$lx-btn-core-bg;
+	padding:4px 13px;
+	color:$lx-btn-core-color;
+	border-radius:$lx-core-radius;
+	font-size:$lx-title-sub-font-size;
+	border-color:$lx-btn-core-bg;
+	&:hover,&:active,&:focus{
+		background:$lx-btn-core-hover-bg;
+		color:$lx-btn-core-hover-color;
+		border-color:$lx-btn-core-hover-bg;
+	}
+}
+
+.blue-sm-btn{
+	background:$lx-btn-sub-bg;
+	padding:4px 13px;
+	color:$lx-btn-sub-color;
+	border-radius:$lx-core-radius;
+	font-size:$lx-title-sub-font-size;
+	border-color:$lx-btn-sub-bg;
+	&:hover,&:active,&:focus{
+		background:$lx-btn-sub-hover-bg;
+		color:$lx-btn-sub-hover-color;
+	}
+}

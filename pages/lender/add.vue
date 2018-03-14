@@ -8,7 +8,7 @@
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="资方编码" for="lender.code">
-                <el-input :disabled="true" v-model="form.lender.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
+                <el-input :disabled="true" v-model="form.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
@@ -203,8 +203,18 @@
       <h1 slot='title' class="leg-text">测试下</h1>
       <div slot='con'>
         <no-ssr>
-          <modal name="hello-world">
-            <formGenerators :formData="formData"></formGenerators>
+          <modal name="hello-world" width="800px" height="auto" class='pch-form-modal' :clickToClose="false">
+            <h3 class="pch-modal-title">新增管理员</h3>
+            <formGenerators :formData="formData">
+              <div slot="pch-modal-footer">
+                <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                  <div class="pch-modal-btns">
+                    <el-button class='default-sm-btn ' type="text" size="small" @click="qr">提交</el-button>
+                    <el-button class='blue-sm-btn ' type="text" size="small" @click="hideModal">取消</el-button>
+                  </div>
+                </el-col>
+              </div>
+            </formGenerators>
           </modal>
         </no-ssr>
         <!-- <formGenerators :formData="formData"></formGenerators> -->
@@ -283,66 +293,67 @@ export default {
     return {
       formData: [{
           type: 'input',
-          label: '1',
-          name: 'test',
-          className: '3',
+          label: '登录名',
+          name: 'mmobile',
           data: '111',
           model: '4',
           scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'select',
-          label: '1',
-          name: 'test1',
-          className: '3',
-          data: '111',
-          model: '4',
-          options: [{
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'date',
-          label: '1',
-          name: 'test4',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'radio',
-          label: '姓名',
-          name: 'test2',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          val: ['男', '女'],
+          disabled:true,
           defaultTip: '7'
         },
         {
-          type: 'textarea',
-          label: '1',
-          name: 'test3',
+          type: 'input',
+          label: '姓名',
+          name: 'mname',
+          data: '111',
+          model: '4',
+          scope: '5',
+          disabled:true,
+          defaultTip: '7'
+        },{
+          type: 'input',
+          label: '身份证号',
+          name: 'mcardno',
+          data: '111',
+          model: '4',
+          scope: '5',
+          disabled:true,
+          defaultTip: '7'
+        },{
+          type: 'input',
+          label: '性别',
+          name: 'msex',
+          data: '111',
+          model: '4',
+          scope: '5',
+          disabled:true,
+          defaultTip: '7'
+        }, {
+          type: 'date',
+          label: '邮箱',
+          name: 'memail',
           className: '3',
           data: '111',
           model: '4',
           scope: '5',
+          defaultTip: '7'
+        },{
+          type: 'input',
+          label: '部门',
+          name: 'mbumen',
+          data: '111',
+          model: '4',
+          scope: '5',
+          disabled:true,
+          defaultTip: '7'
+        },{
+          type: 'input',
+          label: '角色',
+          name: 'muser',
+          data: '111',
+          model: '4',
+          scope: '5',
+          disabled:true,
           defaultTip: '7'
         }
       ],
@@ -451,6 +462,8 @@ export default {
   created() {
     this.addIndex()
     this.form.code = this.$route.query.code
+    // console.log(this.$route.query.code)
+    console.log(this.form.code)
     // console.log(this.$modal)
     // this.open5();
   },
@@ -547,10 +560,15 @@ export default {
     changedate() {
       console.log(this.form.lender.business_start_date)
     },
-    show() {
+    showModal() {
       this.$modal.show('hello-world');
     },
-    hide() {
+    qr(){
+      this.$validator.validateAll('sss').then((result) => {
+        console.log(result)
+      })
+    },
+    hideModal() {
       this.$modal.hide('hello-world');
     },
     open5() {
