@@ -24,7 +24,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ['axios','v-distpicker'],
+    vendor: ['axios', 'v-distpicker'],
     /*
      ** Run ESLint on save
      */
@@ -43,7 +43,13 @@ module.exports = {
     '~assets/scss/main.scss',
     '~assets/scss/components/vee-validate.scss'
   ],
-  plugins: ['~plugins/axios', '~plugins/element', '~plugins/vee-validate', '~plugins/global'],
+  plugins: [
+    '~plugins/axios',
+    '~plugins/element',
+    '~plugins/vee-validate',
+    '~plugins/global',
+    { src: '~/plugins/vue-js-modal', ssr: false }
+  ],
   router: {
     // middleware: ['auth']
   }

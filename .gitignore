@@ -12,3 +12,5 @@ dist
 
 
 test/*
+.idea
+.idea/*

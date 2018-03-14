@@ -2,12 +2,38 @@ import request from '@/plugins/axios'
 const api = {
   // 资方列表
   async fetchLenderList(params) {
-    let { data } = await request.get('/lender/search',params)
+    let { data } = await request.get('/lender/getInfoList',params)
+    console.log(data)
     return data
   },
   // 资方开户
   async postLender(data) {
-    let { result } = await request.post('/lender',data)
+    let { result } = await request.post('/lender/add',data)
+    return result
+  },
+  // 资方编辑
+  async putLender(data) {
+    let { result } = await request.post('/lender/update',data)
+    return result
+  },
+  //担保方列表
+   async fetchGuarantorList(params) {
+    let { data } = await request.get('/guarantor/search',params)
+    return data
+  },
+  //担保方开户
+   async postGuarantor(data) {
+    let { result } = await request.post('/guarantor',data)
+    return result
+  },
+  //sp列表
+   async fetchSpList(params) {
+    let { data } = await request.get('/sp/search',params)
+    return data
+  },
+  //sp开户
+   async postSp(data) {
+    let { result } = await request.post('/sp',data)
     return result
   },
   // 出账列表

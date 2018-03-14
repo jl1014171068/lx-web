@@ -13,19 +13,19 @@
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="资方名称" for="name" :class="{ 'vee-control': true }">
-                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
+                <el-input v-model="form.lender.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
                 <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方简称" for="shortName" :class="{ 'vee-control': true }">
-                <el-input v-model="form.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('shortName') }" name="shortName" type="text" placeholder="资方简称"></el-input>
+              <el-form-item label="简称" for="shortName" :class="{ 'vee-control': true }">
+                <el-input v-model="form.lender.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('shortName') }" name="shortName" type="text" placeholder="简称"></el-input>
                 <span v-show="errors.has('shortName')" class="help is-danger">{{ errors.first('shortName') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="公司类型" for="type" :class="{ 'vee-control': true }">
-                <el-select clearable v-model="form.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type') }" name="type">
+              <el-form-item label="类型" for="type" :class="{ 'vee-control': true }">
+                <el-select clearable v-model="form.lender.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type') }" name="type">
                   <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
                 <span v-show="errors.has('type')" class="help is-danger">{{ errors.first('type') }}</span>
@@ -33,7 +33,7 @@
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="证件类型" for="cardType" :class="{ 'vee-control': true }">
-                <el-select clearable v-model="form.cardType" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardType') }" name="cardType">
+                <el-select clearable v-model="form.lender.cardType" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardType') }" name="cardType">
                   <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
                 <span v-show="errors.has('cardType')" class="help is-danger">{{ errors.first('cardType') }}</span>
@@ -41,58 +41,58 @@
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="证件号码" for="cardNo" :class="{ 'vee-control': true }">
-                <el-input v-model="form.cardNo" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardNo') }" name="cardNo" type="text" placeholder="证件号码"></el-input>
+                <el-input v-model="form.lender.cardNo" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardNo') }" name="cardNo" type="text" placeholder="证件号码"></el-input>
                 <span v-show="errors.has('cardNo')" class="help is-danger">{{ errors.first('cardNo') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="营业起始日" for="business_start_date" :class="{ 'vee-control': true }">
-                <el-date-picker @change='changedate' v-model="form.business_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_start_date') }" name="business_start_date" placeholder="营业起始日"></el-date-picker>
-                <span v-show="errors.has('business_start_date')" class="help is-danger">{{ errors.first('business_start_date') }}</span>
+              <el-form-item label="营业起始日" for="bussBegin" :class="{ 'vee-control': true }">
+                <el-date-picker value-format="yyyy-MM-dd" v-model="form.lender.bussBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('bussBegin') }" name="bussBegin" placeholder="营业起始日"></el-date-picker>
+                <span v-show="errors.has('bussBegin')" class="help is-danger">{{ errors.first('bussBegin') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="营业到期日" for="business_end_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.business_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_end_date') }" name="business_end_date" placeholder="营业到期日"></el-date-picker>
-                <span v-show="errors.has('business_end_date')" class="help is-danger">{{ errors.first('business_end_date') }}</span>
+              <el-form-item label="营业起始日" for="bussEnd" :class="{ 'vee-control': true }">
+                <el-date-picker value-format="yyyy-MM-dd" v-model="form.lender.bussEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('bussEnd') }" name="bussEnd" placeholder="营业起始日"></el-date-picker>
+                <span v-show="errors.has('bussEnd')" class="help is-danger">{{ errors.first('bussEnd') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="合作开始日" for="cooperative_start_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.cooperative_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_start_date') }" name="cooperative_start_date" placeholder="合作开始日"></el-date-picker>
-                <span v-show="errors.has('cooperative_start_date')" class="help is-danger">{{ errors.first('cooperative_start_date') }}</span>
+              <el-form-item label="合作开始日" for="togeBegin" :class="{ 'vee-control': true }">
+                <el-date-picker value-format="yyyy-MM-dd" v-model="form.lender.togeBegin" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('togeBegin') }" name="togeBegin" placeholder="合作开始日"></el-date-picker>
+                <span v-show="errors.has('togeBegin')" class="help is-danger">{{ errors.first('togeBegin') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="合作到期日" for="cooperative_end_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.cooperative_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_end_date') }" name="cooperative_end_date" placeholder="合作到期日"></el-date-picker>
-                <span v-show="errors.has('cooperative_end_date')" class="help is-danger">{{ errors.first('cooperative_end_date') }}</span>
+              <el-form-item label="合作到期日" for="togeEnd" :class="{ 'vee-control': true }">
+                <el-date-picker value-format="yyyy-MM-dd" v-model="form.lender.togeEnd" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('togeEnd') }" name="togeEnd" placeholder="合作到期日"></el-date-picker>
+                <span v-show="errors.has('togeEnd')" class="help is-danger">{{ errors.first('togeEnd') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="电子邮件" for="email" :class="{ 'vee-control': true }">
-                <el-input v-model="form.email" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="电子邮件"></el-input>
+                <el-input v-model="form.lender.email" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="电子邮件"></el-input>
                 <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="注册资本(万美金)" for="regCapital" :class="{ 'vee-control': true }">
-                <el-input v-model="form.regCapital" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('regCapital') }" name="regCapital" type="text" placeholder="注册资本(万美金)"></el-input>
+                <el-input v-model="form.lender.regCapital" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('regCapital') }" name="regCapital" type="text" placeholder="注册资本(万美金)"></el-input>
                 <span v-show="errors.has('regCapital')" class="help is-danger">{{ errors.first('regCapital') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" class='pch-area'>
               <el-form-item label="注册地址" for="area" :class="{ 'vee-control': true }">
                 <no-ssr>
-                  <v-distpicker :placeholders="placeholders" :province="form.province" :city="form.city" :area="form.area" @selected="changeSelect"></v-distpicker>
+                  <v-distpicker :placeholders="placeholders" :province="form.lender.provinceId" :city="form.lender.cityId" :area="form.lender.areaId" @selected="changeSelect"></v-distpicker>
                 </no-ssr>
-                <input type="hidden" v-model="form.area" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="area">
+                <input type="hidden" v-model="form.lender.areaId" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="area">
                 <span v-show="errors.has('area')" class="help is-danger">{{ errors.first('area') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" class='pch-address'>
               <el-form-item for="address">
-                <el-input v-model="form.address" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" name="address" type="text" placeholder="详细注册地址"></el-input>
+                <el-input v-model="form.lender.address" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" name="address" type="text" placeholder="详细注册地址"></el-input>
                 <span v-show="errors.has('address')" class="help is-danger">详细注册地址不能为空</span>
               </el-form-item>
             </el-col>
@@ -162,22 +162,7 @@
       <titleField>
         <h1 slot='title' class="leg-text">管理员信息</h1>
         <div slot='con'>
-          <el-row :gutter="24">
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="手机号码" for="phone" :class="{ 'vee-control': true }">
-                <el-input placeholder="请输入内容" v-model="form.lender.phone" class="input-with-select" v-validate="'required|mobile'" :class="{'input': true, 'is-danger': errors.has('phone') }" name='phone'>
-                  <el-button slot="append" icon="el-icon-search" @click='searchAdmin'></el-button>
-                </el-input>
-                <span v-show="errors.has('phone')" class="help is-danger">{{ errors.first('phone') }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="姓名" for="adname" :class="{ 'vee-control': true }">
-                <el-input v-model="form.lender.adname" disabled v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('adname') }" name="adname" type="text" placeholder="姓名"></el-input>
-                <span v-show="errors.has('adname')" class="help is-danger">请输入姓名</span>
-              </el-form-item>
-            </el-col>
-          </el-row>
+          
         </div>
       </titleField>
       <titleField>
@@ -199,32 +184,18 @@
         </div>
       </titleField>
     </el-form>
-    <titleField>
-      <h1 slot='title' class="leg-text">测试下</h1>
-      <div slot='con'>
-        <no-ssr>
-          <modal name="hello-world">
-            <formGenerators :formData="formData"></formGenerators>
-          </modal>
-        </no-ssr>
-        <!-- <formGenerators :formData="formData"></formGenerators> -->
-      </div>
-    </titleField>
   </div>
 </template>
 <style lang="scss">
-@import "./lender.scss"
+@import "./guarantor.scss"
 
 </style>
 <script>
 import Vue from 'vue'
 import titleField from '~/components/common/title-field/title-field'
-import formGenerators from '~/components/common/vue-generators/vue-generators'
 import { Validator } from 'vee-validate'
 import { API_SERVER } from '~/config/config'
-
-let vm = new Vue()
-
+// 
 if (process.browser) {
   var Distpicker = require('v-distpicker')
   Vue.use(Distpicker)
@@ -240,16 +211,16 @@ const dictionary = {
       cardType: {
         required: () => '请选择证件类型'
       },
-      business_start_date: {
+      bussBegin: {
         required: () => '请选择营业起始日'
       },
-      business_end_date: {
-        required: () => '请选择营业到期日',
+      bussEnd: {
+        required: () => '请选择营业到期日'
       },
-      cooperative_start_date: {
+      togeBegin: {
         required: () => '请选择合作开始日'
       },
-      cooperative_end_date: {
+      togeEnd: {
         required: () => '请选择合作到期日'
       },
       area: {
@@ -263,89 +234,31 @@ const dictionary = {
     },
     attributes: {
       name: '资方名称',
-      shortName: '资方简称',
-      type: '公司类型',
+      shortName: '简称',
+      type: '类型',
       cardType: '证件类型',
       cardNo: '证件类型号码',
       email: '电子邮件',
       regCapital: '注册资本(万美金)',
-      address: '详细注册地址',
-      phone: '手机号'
+      address: '详细注册地址'
     }
   }
 };
 
 Validator.localize(dictionary);
 
+const tableDefault = {
+  utype: '',
+  uname: '',
+  mobile: '',
+  email: '',
+  bak: '',
+  admin: false
+}
 
 export default {
   data() {
     return {
-      formData: [{
-          type: 'input',
-          label: '1',
-          name: 'test',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'select',
-          label: '1',
-          name: 'test1',
-          className: '3',
-          data: '111',
-          model: '4',
-          options: [{
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'date',
-          label: '1',
-          name: 'test4',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'radio',
-          label: '姓名',
-          name: 'test2',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          val: ['男', '女'],
-          defaultTip: '7'
-        },
-        {
-          type: 'textarea',
-          label: '1',
-          name: 'test3',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          defaultTip: '7'
-        }
-      ],
       typeOption: [{
         value: '选项1',
         label: '黄金糕'
@@ -412,27 +325,26 @@ export default {
       onlyCheck: false,
       uploadImgurl: API_SERVER + '/audit/todo/loanupload',
       uploadimgs: '',
-      // area: '',
-
       form: {
-        province: 111,
-        city: 222,
-        area: 2222,
-        address: '3123',
-        regCapital: '213',
-        email: '313@qq.com',
-        business_start_date: '2018-10-10',
-        business_end_date: '2018-10-10',
-        cooperative_start_date: '2018-10-10',
-        cooperative_end_date: '2018-10-10',
-        cardType: 10,
-        cardNo: 'L0000000843',
-        type: 10,
-        name: 'da',
-        shortName: '213',
-        code: 'L0000000843',
-        phone: '13917257230',
-        adname: '3123',
+        area: '',
+        lender: {
+          provinceId: '',
+          cityId: '',
+          areaId: '',
+          address: '',
+          regCapital: '',
+          email: '',
+          bussBegin: '',
+          bussEnd: '',
+          togeBegin: '',
+          togeEnd: '',
+          cardType: '',
+          cardNo: '',
+          type: '',
+          name: '',
+          shortName: '',
+          code: '',
+        },
         contactsList: [{
           utype: '',
           uname: '',
@@ -441,29 +353,16 @@ export default {
           bak: '',
           admin: false
         }],
-        attachments: [],
-        lender: {
-
-        }
+        attachments: []
       }
     }
   },
   created() {
     this.addIndex()
-    this.form.code = this.$route.query.code
-    // console.log(this.$modal)
-    // this.open5();
   },
   mounted() {},
   methods: {
     onSubmit() {
-      let page = this.$route.query.page
-      if (page === 'look') {
-
-      } else if (page === 'update') {
-        this.$store.dispatch('putLender', this.form);
-      }
-      return false;
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.$store.dispatch('postLenderAdd', this.form);
@@ -482,9 +381,9 @@ export default {
     },
     changeSelect(data) {
       //三级联动校验赋值
-      this.form.province = data.province.value
-      this.form.city = data.city.value
-      this.form.area = data.area.value
+      this.form.lender.provinceId = data.province.value
+      this.form.lender.cityId = data.city.value
+      this.form.lender.areaId = data.area.value
     },
     handleRemove(file, fileList) {
       // console.log(file, fileList);
@@ -530,38 +429,10 @@ export default {
           fileName: '营业执照'
         })
       })
-    },
-    searchAdmin() {
-      this.$modal.show('hello-world');
-
-      // this.$validator.validateAll('adminphone').then((result) => {
-      //   if (!result) {
-      //     this.$message({
-      //       message: '请输入正确的手机号码！',
-      //       type: 'warning'
-      //     });
-      //   }
-      // });
-      // console.log(this.form.lender.phone)
-    },
-    changedate() {
-      console.log(this.form.lender.business_start_date)
-    },
-    show() {
-      this.$modal.show('hello-world');
-    },
-    hide() {
-      this.$modal.hide('hello-world');
-    },
-    open5() {
-      this.$alert(`<b>111</b>`, '这是标题？', {
-        dangerouslyUseHTMLString: true
-      });
     }
   },
   components: {
     titleField,
-    formGenerators
   },
   watch: {
     'form.attachments' (news, old) {

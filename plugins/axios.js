@@ -22,7 +22,15 @@ axios.interceptors.response.use(res => {
 const checkStatus = (res) => {
   // var RES_MESSAGE = res.message ? res.message : (res.msg ? res.msg : '');
   if (res && (res.status === 200 || res.status === 304 || res.status === 400)) {
-    return res
+    if (res.data.code == 200 || res.data.code == 0) {
+      return res
+    } else {
+      Message({
+        message: res.data.msg,
+        type: 'error',
+        duration: 5 * 1000
+      })
+    }
   }
   // 异常状态下，把错误信息返回去
   return {
@@ -35,11 +43,11 @@ const checkCode = (res) => {
   // var RES_MESSAGE = res.message ? res.message : (res.msg ? res.msg : '');
   // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
   if (res.status === -404) {
-    Message({
-      message: 'RES_MESSAGE',
-      type: 'error',
-      duration: 5 * 1000
-    })
+    // Message({
+    //   message: 'RES_MESSAGE',
+    //   type: 'error',
+    //   duration: 5 * 1000
+    // })
   }
   return res
 }
@@ -50,11 +58,12 @@ export default {
       method: 'post',
       baseURL: API_SERVER,
       url,
-      data: qs.stringify(data),
+      data: JSON.stringify(data),
       timeout: 5000,
       headers: {
+        'Accept': "application/json",
         'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'Content-Type': 'application/json;charset=UTF-8'
       }
     }).then((res) => {
       return checkStatus(res)

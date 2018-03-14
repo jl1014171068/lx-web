@@ -13,6 +13,8 @@ import global from './common/global';
 
 import outer from './modules/outer';
 import lender from './modules/lender';
+import guarantor from './modules/guarantor';
+import sp from './modules/sp';
 
 
 
@@ -25,7 +27,9 @@ const store = () => {
     modules: {
       outer,
       global,
-      lender
+      lender,
+      guarantor,
+      sp
     },
     strict: debug,
     plugins: debug ? [createLogger()] : []
