@@ -43,8 +43,17 @@ export default {
   }),
   methods: {
     lookDetail(row, action) {
+      let url;
+      if (action == 'look') {
+        url = "/lender/detail/" + row.code
+
+      } else if (action == 'update') {
+        url = "/lender/update?code=" + row.code
+      }
+      this.$router.push(url)
+      return false;
       // if (row.myTask.status == 'todo') {
-      let url = "/lender/add?code=" + row.code + '&page=' + action
+      // let url = "/lender/add?code=" + row.code
       this.$router.push(url)
       // }
       // console.log(row.myTask);

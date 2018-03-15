@@ -30,10 +30,10 @@ const store = () => {
       guarantor,
       sp
     },
-    strict: debug,
+    strict: false,
+    // strict: debug,
     plugins: debug ? [createLogger()] : []
   })
 }
 
-export  const  strict  =  false
 export default store

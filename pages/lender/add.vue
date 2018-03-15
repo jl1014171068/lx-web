@@ -82,12 +82,12 @@
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" class='pch-area'>
-              <el-form-item label="注册地址" for="area" :class="{ 'vee-control': true }">
+              <el-form-item label="注册地址" for="addressValidate" :class="{ 'vee-control': true }">
                 <no-ssr>
                   <v-distpicker :placeholders="placeholders" :province="form.province" :city="form.city" :area="form.area" @selected="changeSelect"></v-distpicker>
                 </no-ssr>
-                <input type="hidden" v-model="form.area" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="area">
-                <span v-show="errors.has('area')" class="help is-danger">{{ errors.first('area') }}</span>
+                <input type="hidden" v-model="addressValidate" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('addressValidate') }" name="addressValidate">
+                <span v-show="errors.has('addressValidate')" class="help is-danger">{{ errors.first('addressValidate') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" class='pch-address'>
@@ -184,7 +184,7 @@
         <h1 slot='title' class="leg-text">上传营业执照</h1>
         <div slot='con'>
           <div class='pch-upload-sign' :class="{ 'vee-control': true }">
-            <el-upload :action="uploadImgurl" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :show-file-list='true' :multiple='true' :auto-upload='true' :on-success='uploadSuccess' :file-list='form.attachments'>
+            <el-upload :action="uploadImgurl" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :show-file-list='true' :multiple='true' :auto-upload='true' :on-success='uploadSuccess' :file-list='attachments'>
               <i class="el-icon-plus"></i>
             </el-upload>
             <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="uploadimgs">
@@ -199,27 +199,22 @@
         </div>
       </titleField>
     </el-form>
-    <titleField>
-      <h1 slot='title' class="leg-text">测试下</h1>
-      <div slot='con'>
-        <no-ssr>
-          <modal name="hello-world" width="800px" height="auto" class='pch-form-modal' :clickToClose="false">
-            <h3 class="pch-modal-title">新增管理员</h3>
-            <formGenerators :formData="formData">
-              <div slot="pch-modal-footer">
-                <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                  <div class="pch-modal-btns">
-                    <el-button class='default-sm-btn ' type="text" size="small" @click="qr">提交</el-button>
-                    <el-button class='blue-sm-btn ' type="text" size="small" @click="hideModal">取消</el-button>
-                  </div>
-                </el-col>
+    <!-- 新增管理员modal -->
+    <no-ssr>
+      <modal name="hello-world" width="800px" height="auto" class='pch-form-modal' :clickToClose="false">
+        <h3 class="pch-modal-title">新增管理员</h3>
+        <formGenerators :formData="formData">
+          <div slot="pch-modal-footer">
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <div class="pch-modal-btns">
+                <el-button class='default-sm-btn ' type="text" size="small" @click="qr">提交</el-button>
+                <el-button class='blue-sm-btn ' type="text" size="small" @click="hideModal">取消</el-button>
               </div>
-            </formGenerators>
-          </modal>
-        </no-ssr>
-        <!-- <formGenerators :formData="formData"></formGenerators> -->
-      </div>
-    </titleField>
+            </el-col>
+          </div>
+        </formGenerators>
+      </modal>
+    </no-ssr>
   </div>
 </template>
 <style lang="scss">
@@ -231,7 +226,7 @@ import Vue from 'vue'
 import titleField from '~/components/common/title-field/title-field'
 import formGenerators from '~/components/common/vue-generators/vue-generators'
 import { Validator } from 'vee-validate'
-import { API_SERVER,UPLOAD_SERVER } from '~/config/config'
+import { API_SERVER, UPLOAD_SERVER } from '~/config/config'
 import { mapState } from 'vuex'
 import defaultOption from '~/config/options'
 
@@ -264,7 +259,7 @@ const dictionary = {
       cooperative_end_date: {
         required: () => '请选择合作到期日'
       },
-      area: {
+      addressValidate: {
         required: () => '请选择注册地址'
       }
     },
@@ -306,7 +301,7 @@ export default {
       dialogVisible: false,
       page: '',
       pageCode: '',
-      onlyCheck:false,
+      onlyCheck: false,
       form: {
         province: '',
         city: '',
@@ -325,7 +320,6 @@ export default {
         shortName: '',
         code: '',
         phone: '',
-        adname: '',
         contactsList: [{
           utype: '',
           realName: '',
@@ -334,14 +328,13 @@ export default {
           remark: '',
           admin: false
         }],
-        fileIds:[],
-        attachments: [],
-        lender: {}
-      }
+        fileIds: []
+      },
+      attachments: [],
+      lender: {}
     }
   },
   created() {
-    this.form.code = this.$route.query.code
     this.page = this.$route.query.page
     this.addIndex()
   },
@@ -361,6 +354,12 @@ export default {
     changeSelect(data) {
       //三级联动校验赋值
       this.addressValidate = data.area.value
+      if (data.province.code) {
+        this.form.province = parseInt(data.province.code)
+        this.form.city = parseInt(data.city.code)
+        this.form.area = parseInt(data.area.code)
+        console.log(this.form)
+      }
     },
     addIndex() {
       //添加index用作name动态
@@ -395,10 +394,19 @@ export default {
       this.onlyCheck = row.admin
     },
     searchAdmin() {
-      this.$modal.show('hello-world');
+      if (defaultOption.phonevalidate.test(this.user.phone)) {
+        this.$modal.show('hello-world');
+        return false;
+      }
+      this.$message({
+        message: '请输入正确的手机号',
+        type: 'warning'
+      });
     },
     handleRemove(file, fileList) {
-      // console.log(file, fileList);
+      let id = file.response.data.id
+      this.form.fileIds.remove(id)
+      this.uploadimgs = this.form.fileIds
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
@@ -406,9 +414,13 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       //上传成功
-      let self = this;
+      let self = this,
+        id = response.data.id;
+      !(id in this.form.fileIds) ? this.form.fileIds.push(id): ''
+      this.uploadimgs = this.form.fileIds
+      return false
       fileList.map(function(i, e) {
-        self.form.attachments.push({
+        self.attachments.push({
           location: response.fileUrl,
           name: response.filename,
           type: response.fileType,
@@ -418,23 +430,13 @@ export default {
       })
     },
     onSubmit() {
-
-       this.$store.dispatch('postLenderAdd', this.form);
-
-      // if (this.page === 'look') {
-
-      // } else if (this.page === 'update') {
-      //   this.$store.dispatch('putLender', this.form);
-      // }
-      return false;
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.$store.dispatch('postLenderAdd', this.form);
-          console.log(result)
-          console.log('ok?')
+          let url = '/lender/list'
+          this.$router.push(url)
           return;
         }
-        console.log('咋啦');
       });
     },
     showModal() {

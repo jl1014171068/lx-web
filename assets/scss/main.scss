@@ -117,8 +117,39 @@
                 }
               }
             }
-            .pch-modal-btns{
-              text-align:center;
+            .pch-modal-btns {
+              text-align: center;
+            }
+          }
+        }
+        &.pch-detail {
+          .pch-detail-item {
+            width: 100%;
+            @include display-inline-block;
+            margin-right: 10px;
+            vertical-align: top;
+            margin-bottom: 22px;
+            @include clearfix;
+            .pch-detail-name {
+              width: 130px;
+              position: absolute;
+              @include display-inline-block;
+              text-align: right;
+              vertical-align: middle;
+              font-size: 14px;
+              color: #606266;
+              line-height: 40px;
+              padding: 0 12px 0 0;
+            }
+            .pch-detail-con {
+              padding-left: 130px;
+              width: 100%;
+              height: 40.5px;
+              display: inline-block;
+              vertical-align: top;
+              line-height: 40px;
+              position: relative;
+              font-size: 14px;
             }
           }
         }

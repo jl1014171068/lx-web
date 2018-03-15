@@ -48,7 +48,8 @@ module.exports = {
     '~plugins/element',
     '~plugins/vee-validate',
     '~plugins/global',
-    { src: '~/plugins/vue-js-modal', ssr: false }
+    { src: '~/plugins/vue-js-modal', ssr: false },
+    { src: '~/plugins/utils', ssr: false }
   ],
   router: {
     // middleware: ['auth']

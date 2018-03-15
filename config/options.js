@@ -66,19 +66,19 @@ const formData = [{
 ];
 
 const select = [{
-  value: '选项1',
-  label: '黄金糕'
+  value: 10,
+  label: '银行'
 }, {
-  value: '选项2',
+  value: 20,
   label: '双皮奶'
 }, {
-  value: '选项3',
+  value: 30,
   label: '蚵仔煎'
 }, {
-  value: '选项4',
+  value: 40,
   label: '龙须面'
 }, {
-  value: '选项5',
+  value: 50,
   label: '北京烤鸭'
 }]
 
@@ -126,11 +126,16 @@ const placeholders = {
   area: '请选择区',
 }
 
+const phonevalidate = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
+
+
+
 const defaultOption = {
   formData: formData,
   select: select,
   addselect: addselect,
   tableData: tableData,
-  placeholders: placeholders
+  placeholders: placeholders,
+  phonevalidate: phonevalidate,
 }
 export default defaultOption

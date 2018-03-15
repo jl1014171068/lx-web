@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form class='pch-form' ref="form" :inline="true" :model="form" label-position="right" label-width='130px'>
+    <el-form class='pch-form' ref="form" :inline="true" label-position="right" label-width='130px'>
       <!-- <el-form ref="form" :inline="true" :model="form" label-position="right" @submit.prevent="validateBeforeSubmit"> -->
       <titleField>
         <h1 slot='title' class="leg-text">开户</h1>
@@ -8,91 +8,91 @@
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="资方编码" for="lender.code">
-                <el-input :disabled="true" v-model="form.lender.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
+                <el-input :disabled="true" v-model="form.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="资方名称" for="name" :class="{ 'vee-control': true }">
-                <el-input v-model="form.lender.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
+                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
                 <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方简称" for="short_name" :class="{ 'vee-control': true }">
-                <el-input v-model="form.lender.short_name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('short_name') }" name="short_name" type="text" placeholder="资方简称"></el-input>
-                <span v-show="errors.has('short_name')" class="help is-danger">{{ errors.first('short_name') }}</span>
+              <el-form-item label="资方简称" for="shortName" :class="{ 'vee-control': true }">
+                <el-input v-model="form.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('shortName') }" name="shortName" type="text" placeholder="资方简称"></el-input>
+                <span v-show="errors.has('shortName')" class="help is-danger">{{ errors.first('shortName') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="公司类型" for="type" :class="{ 'vee-control': true }">
-                <el-select clearable v-model="form.lender.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type') }" name="type">
+                <el-select clearable v-model="form.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type') }" name="type">
                   <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
                 <span v-show="errors.has('type')" class="help is-danger">{{ errors.first('type') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="证件类型" for="card_type" :class="{ 'vee-control': true }">
-                <el-select clearable v-model="form.lender.card_type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('card_type') }" name="card_type">
+              <el-form-item label="证件类型" for="cardType" :class="{ 'vee-control': true }">
+                <el-select clearable v-model="form.cardType" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardType') }" name="cardType">
                   <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
-                <span v-show="errors.has('card_type')" class="help is-danger">{{ errors.first('card_type') }}</span>
+                <span v-show="errors.has('cardType')" class="help is-danger">{{ errors.first('cardType') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="证件号码" for="card_no" :class="{ 'vee-control': true }">
-                <el-input v-model="form.lender.card_no" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('card_no') }" name="card_no" type="text" placeholder="证件号码"></el-input>
-                <span v-show="errors.has('card_no')" class="help is-danger">{{ errors.first('card_no') }}</span>
+              <el-form-item label="证件号码" for="cardNo" :class="{ 'vee-control': true }">
+                <el-input v-model="form.cardNo" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cardNo') }" name="cardNo" type="text" placeholder="证件号码"></el-input>
+                <span v-show="errors.has('cardNo')" class="help is-danger">{{ errors.first('cardNo') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="营业起始日" for="business_start_date" :class="{ 'vee-control': true }">
-                <el-date-picker @change='changedate' v-model="form.lender.business_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_start_date') }" name="business_start_date" placeholder="营业起始日"></el-date-picker>
+                <el-date-picker @change='changedate' v-model="form.business_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_start_date') }" name="business_start_date" placeholder="营业起始日"></el-date-picker>
                 <span v-show="errors.has('business_start_date')" class="help is-danger">{{ errors.first('business_start_date') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="营业到期日" for="business_end_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.lender.business_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_end_date') }" name="business_end_date" placeholder="营业到期日"></el-date-picker>
+                <el-date-picker v-model="form.business_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_end_date') }" name="business_end_date" placeholder="营业到期日"></el-date-picker>
                 <span v-show="errors.has('business_end_date')" class="help is-danger">{{ errors.first('business_end_date') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="合作开始日" for="cooperative_start_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.lender.cooperative_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_start_date') }" name="cooperative_start_date" placeholder="合作开始日"></el-date-picker>
+                <el-date-picker v-model="form.cooperative_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_start_date') }" name="cooperative_start_date" placeholder="合作开始日"></el-date-picker>
                 <span v-show="errors.has('cooperative_start_date')" class="help is-danger">{{ errors.first('cooperative_start_date') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="合作到期日" for="cooperative_end_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.lender.cooperative_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_end_date') }" name="cooperative_end_date" placeholder="合作到期日"></el-date-picker>
+                <el-date-picker v-model="form.cooperative_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_end_date') }" name="cooperative_end_date" placeholder="合作到期日"></el-date-picker>
                 <span v-show="errors.has('cooperative_end_date')" class="help is-danger">{{ errors.first('cooperative_end_date') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="电子邮件" for="email" :class="{ 'vee-control': true }">
-                <el-input v-model="form.lender.email" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="电子邮件"></el-input>
+                <el-input v-model="form.email" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="电子邮件"></el-input>
                 <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="注册资本(万美金)" for="reg_capital" :class="{ 'vee-control': true }">
-                <el-input v-model="form.lender.reg_capital" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('reg_capital') }" name="reg_capital" type="text" placeholder="注册资本(万美金)"></el-input>
-                <span v-show="errors.has('reg_capital')" class="help is-danger">{{ errors.first('reg_capital') }}</span>
+              <el-form-item label="注册资本(万美金)" for="regCapital" :class="{ 'vee-control': true }">
+                <el-input v-model="form.regCapital" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('regCapital') }" name="regCapital" type="text" placeholder="注册资本(万美金)"></el-input>
+                <span v-show="errors.has('regCapital')" class="help is-danger">{{ errors.first('regCapital') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" class='pch-area'>
               <el-form-item label="注册地址" for="area" :class="{ 'vee-control': true }">
                 <no-ssr>
-                  <v-distpicker :placeholders="placeholders" :province="form.lender.province" :city="form.lender.city" :area="form.lender.area" @selected="changeSelect"></v-distpicker>
+                  <v-distpicker :placeholders="placeholders" :province="form.province" :city="form.city" :area="form.area" @selected="changeSelect"></v-distpicker>
                 </no-ssr>
-                <input type="hidden" v-model="form.lender.area" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="area">
+                <input type="hidden" v-model="form.area" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="area">
                 <span v-show="errors.has('area')" class="help is-danger">{{ errors.first('area') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" class='pch-address'>
               <el-form-item for="address">
-                <el-input v-model="form.lender.address" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" name="address" type="text" placeholder="详细注册地址"></el-input>
+                <el-input v-model="form.address" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" name="address" type="text" placeholder="详细注册地址"></el-input>
                 <span v-show="errors.has('address')" class="help is-danger">详细注册地址不能为空</span>
               </el-form-item>
             </el-col>
@@ -115,11 +115,11 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="uname" label="姓名" width="250">
+            <el-table-column prop="realName" label="姓名" width="250">
               <template slot-scope="scope">
                 <div :class="{ 'vee-control': true }">
-                  <el-input v-model="scope.row.uname" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.uname`) }" :name="`form.contactsList${scope.row.index}.uname`"></el-input>
-                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.uname`)">请输入姓名</span>
+                  <el-input v-model="scope.row.realName" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.realName`) }" :name="`form.contactsList${scope.row.index}.realName`"></el-input>
+                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.realName`)">请输入姓名</span>
                 </div>
               </template>
             </el-table-column>
@@ -135,10 +135,10 @@
                 <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.email`)">请输入电子邮箱</span>
               </template>
             </el-table-column>
-            <el-table-column prop="bak" label="备注" width="250">
+            <el-table-column prop="remark" label="备注" width="250">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.bak" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.bak`) }" :name="`form.contactsList${scope.row.index}.bak`"></el-input>
-                <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.bak`)">请输入备注</span>
+                <el-input v-model="scope.row.remark" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.remark`) }" :name="`form.contactsList${scope.row.index}.remark`"></el-input>
+                <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.remark`)">请输入备注</span>
               </template>
             </el-table-column>
             <el-table-column prop="name" label="是否设置管理员" width="250">
@@ -165,7 +165,7 @@
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="手机号码" for="phone" :class="{ 'vee-control': true }">
-                <el-input placeholder="请输入内容" v-model="form.lender.phone" class="input-with-select" v-validate="'required|mobile'" :class="{'input': true, 'is-danger': errors.has('phone') }" name='phone'>
+                <el-input placeholder="请输入内容" v-model="user.phone" class="input-with-select" v-validate="'required|mobile'" :class="{'input': true, 'is-danger': errors.has('phone') }" name='phone'>
                   <el-button slot="append" icon="el-icon-search" @click='searchAdmin'></el-button>
                 </el-input>
                 <span v-show="errors.has('phone')" class="help is-danger">{{ errors.first('phone') }}</span>
@@ -173,7 +173,7 @@
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="姓名" for="adname" :class="{ 'vee-control': true }">
-                <el-input v-model="form.lender.adname" disabled v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('adname') }" name="adname" type="text" placeholder="姓名"></el-input>
+                <el-input v-model="user.adname" disabled v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('adname') }" name="adname" type="text" placeholder="姓名"></el-input>
                 <span v-show="errors.has('adname')" class="help is-danger">请输入姓名</span>
               </el-form-item>
             </el-col>
@@ -184,7 +184,7 @@
         <h1 slot='title' class="leg-text">上传营业执照</h1>
         <div slot='con'>
           <div class='pch-upload-sign' :class="{ 'vee-control': true }">
-            <el-upload :action="uploadImgurl" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :show-file-list='true' :multiple='true' :auto-upload='true' :on-success='uploadSuccess' :file-list='form.attachments'>
+            <el-upload :action="uploadImgurl" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :show-file-list='true' :multiple='true' :auto-upload='true' :on-success='uploadSuccess' :file-list='attachments'>
               <i class="el-icon-plus"></i>
             </el-upload>
             <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="uploadimgs">
@@ -202,7 +202,22 @@
     <titleField>
       <h1 slot='title' class="leg-text">测试下</h1>
       <div slot='con'>
-        <formGenerators :formData="formData"></formGenerators>
+        <no-ssr>
+          <modal name="hello-world" width="800px" height="auto" class='pch-form-modal' :clickToClose="false">
+            <h3 class="pch-modal-title">新增管理员</h3>
+            <formGenerators :formData="formData">
+              <div slot="pch-modal-footer">
+                <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                  <div class="pch-modal-btns">
+                    <el-button class='default-sm-btn ' type="text" size="small" @click="qr">提交</el-button>
+                    <el-button class='blue-sm-btn ' type="text" size="small" @click="hideModal">取消</el-button>
+                  </div>
+                </el-col>
+              </div>
+            </formGenerators>
+          </modal>
+        </no-ssr>
+        <!-- <formGenerators :formData="formData"></formGenerators> -->
       </div>
     </titleField>
   </div>
@@ -216,7 +231,9 @@ import Vue from 'vue'
 import titleField from '~/components/common/title-field/title-field'
 import formGenerators from '~/components/common/vue-generators/vue-generators'
 import { Validator } from 'vee-validate'
-import { API_SERVER } from '~/config/config'
+import { API_SERVER, UPLOAD_SERVER } from '~/config/config'
+import { mapState } from 'vuex'
+import defaultOption from '~/config/options'
 
 let vm = new Vue()
 
@@ -232,7 +249,7 @@ const dictionary = {
       type: {
         required: () => '请选择类型'
       },
-      card_type: {
+      cardType: {
         required: () => '请选择证件类型'
       },
       business_start_date: {
@@ -258,12 +275,12 @@ const dictionary = {
     },
     attributes: {
       name: '资方名称',
-      short_name: '资方简称',
+      shortName: '资方简称',
       type: '公司类型',
-      card_type: '证件类型',
-      card_no: '证件类型号码',
+      cardType: '证件类型',
+      cardNo: '证件类型号码',
       email: '电子邮件',
-      reg_capital: '注册资本(万美金)',
+      regCapital: '注册资本(万美金)',
       address: '详细注册地址',
       phone: '手机号'
     }
@@ -272,183 +289,149 @@ const dictionary = {
 
 Validator.localize(dictionary);
 
-
 export default {
   data() {
     return {
-      formData: [{
-          type: 'input',
-          label: '1',
-          name: 'test',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'select',
-          label: '1',
-          name: 'test1',
-          className: '3',
-          data: '111',
-          model: '4',
-          options: [{
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'date',
-          label: '1',
-          name: 'test4',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          defaultTip: '7'
-        }, {
-          type: 'radio',
-          label: '姓名',
-          name: 'test2',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          val: ['男', '女'],
-          defaultTip: '7'
-        },
-        {
-          type: 'textarea',
-          label: '1',
-          name: 'test3',
-          className: '3',
-          data: '111',
-          model: '4',
-          scope: '5',
-          defaultTip: '7'
-        }
-      ],
-      typeOption: [{
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
-      options2: [{
-        label: '江苏',
-        cities: []
-      }, {
-        label: '浙江',
-        cities: []
-      }],
-      props: {
-        value: 'label',
-        children: 'cities'
+      typeOption: defaultOption.select,
+      placeholders: defaultOption.placeholders,
+      formData: defaultOption.formData,
+      addressValidate: '',
+      user: {
+        phone: '',
+        adname: ''
       },
-      tableData: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄',
-        zip: 200333
-      }],
+      uploadImgurl: UPLOAD_SERVER,
+      uploadimgs: '',
       dialogImageUrl: '',
       dialogVisible: false,
-      placeholders: {
-        province: '请选择省',
-        city: '请选择城市',
-        area: '请选择区',
-      },
+      page: '',
+      pageCode: '',
       onlyCheck: false,
-      uploadImgurl: API_SERVER + '/audit/todo/loanupload',
-      uploadimgs: '',
-      form: {
-        area: '',
-        lender: {
-          province: '',
-          city: '',
-          area: '',
-          address: '',
-          reg_capital: '',
-          email: '',
-          business_start_date: '',
-          business_end_date: '',
-          cooperative_start_date: '',
-          cooperative_end_date: '',
-          card_type: '',
-          card_no: '',
-          type: '',
-          name: '',
-          short_name: '',
-          code: '',
-          phone: '',
-          adname: ''
-        },
-        contactsList: [{
-          utype: '',
-          uname: '',
-          mobile: '',
-          email: '',
-          bak: '',
-          admin: false
-        }],
-        attachments: []
-      }
+      attachments: [],
+      // form: {
+      //   province: '',
+      //   city: '',
+      //   area: '',
+      //   address: '',
+      //   regCapital: '',
+      //   email: '',
+      //   business_start_date: '',
+      //   business_end_date: '',
+      //   cooperative_start_date: '',
+      //   cooperative_end_date: '',
+      //   cardType: '',
+      //   cardNo: '',
+      //   type: '',
+      //   name: '',
+      //   shortName: '',
+      //   code: '',
+      //   phone: '',
+      //   adname: '',
+      //   contactsList: [{
+      //     utype: '',
+      //     realName: '',
+      //     mobile: '',
+      //     email: '',
+      //     remark: '',
+      //     admin: false
+      //   }],
+      //   fileIds: []
+      // }
     }
   },
   created() {
     this.addIndex()
-    this.form.lender.code=this.$route.query.code
-    // this.open5();
   },
-  mounted() {},
+  mounted() {
+    this.$store.dispatch('getLenderListCode', { code: this.$route.query.code })
+    // console.log(this.$store.state.lender.lists)
+    // this.$nextTick(() => {
+    //   let result = this.$store.state.lender.lists
+    //   console.log(result)
+    //   // this.form = result
+    // })
+  },
   methods: {
+    changedate() {
+      //日期变化
+      // console.log(this.form.lender.business_start_date)
+    },
+    changeSelect(data) {
+      //三级联动校验赋值
+      this.addressValidate = data.area.value
+    },
+    addIndex() {
+      //添加index用作name动态
+      if (!this.form.contactsList) return false
+      this.form.contactsList.map(function(el, ind) {
+        if (el.index) delete el.index;
+        return el.index = ind
+      })
+    },
+    addRow() {
+      //新增一行
+      this.form.contactsList.push({
+        utype: '',
+        realName: '',
+        mobile: '',
+        email: '',
+        remark: '',
+        admin: false
+      })
+      this.addIndex()
+    },
+    removeRow(data) {
+      //删除行
+      let index = data.$index,
+        row = data.row;
+      this.form.contactsList.splice(index, 1)
+    },
+    addAdmin(data) {
+      //设置管理员
+      let index = data.$index,
+        row = data.row;
+      this.onlyCheck = row.admin
+    },
+    searchAdmin() {
+      if (defaultOption.phonevalidate.test(this.user.phone)) {
+        this.$modal.show('hello-world');
+        return false;
+      }
+      this.$message({
+        message: '请输入正确的手机号',
+        type: 'warning'
+      });
+    },
+    handleRemove(file, fileList) {
+      // console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    uploadSuccess(response, file, fileList) {
+      //上传成功
+      let self = this;
+      fileList.map(function(i, e) {
+        self.attachments.push({
+          location: response.fileUrl,
+          name: response.filename,
+          type: response.fileType,
+          size: i.size,
+          fileName: '营业执照'
+        })
+      })
+    },
     onSubmit() {
+
+      this.$store.dispatch('postLenderAdd', this.form);
+
+      // if (this.page === 'look') {
+
+      // } else if (this.page === 'update') {
+      //   this.$store.dispatch('putLender', this.form);
+      // }
+      return false;
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.$store.dispatch('postLenderAdd', this.form);
@@ -459,76 +442,16 @@ export default {
         console.log('咋啦');
       });
     },
-    removeRow(data) {
-      //删除行
-      let index = data.$index,
-        row = data.row;
-      this.form.contactsList.splice(index, 1)
+    showModal() {
+      this.$modal.show('hello-world');
     },
-    changeSelect(data) {
-      //三级联动校验赋值
-      this.form.lender.province = data.province.value
-      this.form.lender.city = data.city.value
-      this.form.lender.area = data.area.value
-    },
-    handleRemove(file, fileList) {
-      // console.log(file, fileList);
-    },
-    handlePictureCardPreview(file) {
-      console.log(file)
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    addIndex() {
-      //添加index用作name动态
-      this.form.contactsList.map(function(el, ind) {
-        if (el.index) delete el.index;
-        return el.index = ind
+    qr() {
+      this.$validator.validateAll('sss').then((result) => {
+        console.log(result)
       })
     },
-    addRow() {
-      this.form.contactsList.push({
-        utype: '',
-        uname: '',
-        mobile: '',
-        email: '',
-        bak: '',
-        admin: false
-      })
-      this.addIndex()
-    },
-    addAdmin(data) {
-      //设置管理员
-      let index = data.$index,
-        row = data.row;
-      this.onlyCheck = row.admin
-    },
-    uploadSuccess(response, file, fileList) {
-      //上传成功
-      var self = this;
-      fileList.map(function(i, e) {
-        self.form.attachments.push({
-          location: response.fileUrl,
-          name: response.filename,
-          type: response.fileType,
-          size: i.size,
-          fileName: '营业执照'
-        })
-      })
-    },
-    searchAdmin() {
-      this.$validator.validateAll('adminphone').then((result) => {
-        if (!result) {
-          this.$message({
-            message: '请输入正确的手机号码！',
-            type: 'warning'
-          });
-        }
-      });
-      // console.log(this.form.lender.phone)
-    },
-    changedate() {
-      console.log(this.form.lender.business_start_date)
+    hideModal() {
+      this.$modal.hide('hello-world');
     },
     open5() {
       this.$alert(`<b>111</b>`, '这是标题？', {
@@ -536,15 +459,14 @@ export default {
       });
     }
   },
+  computed: mapState({
+    form: state => state.lender.lists
+  }),
+  // form: state => state.lender.lists
+  beforeCreate() {},
   components: {
     titleField,
     formGenerators
-  },
-  watch: {
-    'form.attachments' (news, old) {
-      if (news.length) this.uploadimgs = news.length
-      else this.uploadimgs = ''
-    }
   }
 }
 

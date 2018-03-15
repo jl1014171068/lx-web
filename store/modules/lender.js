@@ -19,6 +19,9 @@ export default {
     LENDER_LIST(state, data) {
       state.lists = data
     },
+    LENDER_DETAIL(state, data) {
+      state.lists = data
+    },
     LENDER_ADD: (state) => {
       Vue.set(state.add, 'success', false);
       Vue.set(state.add, 'failure', null);
@@ -53,13 +56,17 @@ export default {
         //   bak: '',
         //   admin: false
         // }
-        console.log(res.data)
         commit(types.LENDER_LIST, res.data)
+      })
+    },
+    getLenderDetail({ commit }, parames) {
+      api.getLenderDetail(parames).then((res) => {
+        let result = res.data;
+        commit(types.LENDER_LIST, result)
       })
     },
     postLenderAdd({ commit }, data) {
       api.postLender(data).then((res) => {
-        console.log(res)
         commit(types.LENDER_ADD_SUCCESS)
       })
     },
