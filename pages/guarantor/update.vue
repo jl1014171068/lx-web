@@ -7,20 +7,14 @@
         <div slot='con'>
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方编码" for="lender.code">
-                <el-input :disabled="true" v-model="form.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
+              <el-form-item label="担保方编码" for="code">
+                <el-input :disabled="true" v-model="form.code" name="code" type="text" placeholder="担保方编码"></el-input>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方名称" for="name" :class="{ 'vee-control': true }">
-                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
+              <el-form-item label="担保方名称" for="name" :class="{ 'vee-control': true }">
+                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="担保方名称"></el-input>
                 <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方简称" for="shortName" :class="{ 'vee-control': true }">
-                <el-input v-model="form.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('shortName') }" name="shortName" type="text" placeholder="资方简称"></el-input>
-                <span v-show="errors.has('shortName')" class="help is-danger">{{ errors.first('shortName') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
@@ -46,27 +40,27 @@
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="营业起始日" for="business_start_date" :class="{ 'vee-control': true }">
-                <el-date-picker @change='changedate' v-model="form.business_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_start_date') }" name="business_start_date" placeholder="营业起始日"></el-date-picker>
-                <span v-show="errors.has('business_start_date')" class="help is-danger">{{ errors.first('business_start_date') }}</span>
+              <el-form-item label="营业起始日" for="businessStartDate" :class="{ 'vee-control': true }">
+                <el-date-picker @change='changedate' v-model="form.businessStartDate" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('businessStartDate') }" name="businessStartDate" placeholder="营业起始日"></el-date-picker>
+                <span v-show="errors.has('businessStartDate')" class="help is-danger">{{ errors.first('businessStartDate') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="营业到期日" for="business_end_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.business_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('business_end_date') }" name="business_end_date" placeholder="营业到期日"></el-date-picker>
-                <span v-show="errors.has('business_end_date')" class="help is-danger">{{ errors.first('business_end_date') }}</span>
+              <el-form-item label="营业到期日" for="businessEndDate" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.businessEndDate" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('businessEndDate') }" name="businessEndDate" placeholder="营业到期日"></el-date-picker>
+                <span v-show="errors.has('businessEndDate')" class="help is-danger">{{ errors.first('businessEndDate') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="合作开始日" for="cooperative_start_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.cooperative_start_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_start_date') }" name="cooperative_start_date" placeholder="合作开始日"></el-date-picker>
-                <span v-show="errors.has('cooperative_start_date')" class="help is-danger">{{ errors.first('cooperative_start_date') }}</span>
+              <el-form-item label="合作开始日" for="cooperativeStartDate" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.cooperativeStartDate" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperativeStartDate') }" name="cooperativeStartDate" placeholder="合作开始日"></el-date-picker>
+                <span v-show="errors.has('cooperativeStartDate')" class="help is-danger">{{ errors.first('cooperativeStartDate') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="合作到期日" for="cooperative_end_date" :class="{ 'vee-control': true }">
-                <el-date-picker v-model="form.cooperative_end_date" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperative_end_date') }" name="cooperative_end_date" placeholder="合作到期日"></el-date-picker>
-                <span v-show="errors.has('cooperative_end_date')" class="help is-danger">{{ errors.first('cooperative_end_date') }}</span>
+              <el-form-item label="合作到期日" for="cooperativeEndDate" :class="{ 'vee-control': true }">
+                <el-date-picker v-model="form.cooperativeEndDate" type="date" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cooperativeEndDate') }" name="cooperativeEndDate" placeholder="合作到期日"></el-date-picker>
+                <span v-show="errors.has('cooperativeEndDate')" class="help is-danger">{{ errors.first('cooperativeEndDate') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
@@ -96,8 +90,6 @@
                 <span v-show="errors.has('address')" class="help is-danger">详细注册地址不能为空</span>
               </el-form-item>
             </el-col>
-            <!--    <input placeholder="请输入手机号" v-validate="'required'" :name="`lender.contactsList${form.ccc}.utype`" v-model="form.address">
-            <span v-show="errors.has(`lender.contactsList${form.ccc}.utype`)" class="errors-tip is-danger">不能为空</span> -->
           </el-row>
         </div>
       </titleField>
@@ -105,16 +97,6 @@
         <h1 slot='title' class="leg-text">联系人信息</h1>
         <div slot='con'>
           <el-table :data="form.contactsList" style="width: 100%" class='pch-table' stripe>
-            <el-table-column prop="utype" label="联系人类型" width="250">
-              <template slot-scope="scope">
-                <div :class="{ 'vee-control': true }">
-                  <el-select clearable v-model="scope.row.utype" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.utype`) }" :name="`form.contactsList${scope.row.index}.utype`">
-                    <el-option v-for="list in typeOption" :key="list.value" :label="list.label" :value="list.value"></el-option>
-                  </el-select>
-                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.utype`)">请选择联系人类型</span>
-                </div>
-              </template>
-            </el-table-column>
             <el-table-column prop="realName" label="姓名" width="250">
               <template slot-scope="scope">
                 <div :class="{ 'vee-control': true }">
@@ -187,7 +169,7 @@
             <el-upload :action="uploadImgurl" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :show-file-list='true' :multiple='true' :auto-upload='true' :on-success='uploadSuccess' :file-list='attachments'>
               <i class="el-icon-plus"></i>
             </el-upload>
-            <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="uploadimgs">
+            <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('uploadimgs') }" name="uploadimgs">
             <span v-show="errors.has('uploadimgs')" class="help is-danger">至少上传一张营业执照</span>
           </div>
           <el-dialog :visible.sync="dialogVisible">
@@ -237,9 +219,9 @@ if (process.browser) {
   Vue.use(Distpicker)
   Vue.component('v-distpicker', Distpicker)
 }
-const obj = { "province": 130000, "city": 130300, "area": 130304, "address": "12312", "regCapital": "1231", "email": "12323", "business_start_date": "2018-03-12", "business_end_date": "2018-03-19", "cooperative_start_date": "2018-02-24", "cooperative_end_date": "2018-03-22", "cardType": 20, "cardNo": "123", "type": 30, "name": "3123313123", "shortName": "231123123123", "code": "", "fileIds": [5636] }
+const obj = { "province": 130000, "city": 130300, "area": 130304, "address": "12312", "regCapital": "1231", "email": "12323", "businessStartDate": "2018-03-12", "businessEndDate": "2018-03-19", "cooperativeStartDate": "2018-02-24", "cooperativeEndDate": "2018-03-22", "cardType": 20, "cardNo": "123", "type": 30, "name": "3123313123", "code": "", "fileIds": [5636] }
 
-const zcobj = { "province": 130000, "city": 130300, "area": 130304, "address": "12312", "regCapital": "1231", "email": "12323", "business_start_date": "2018-03-12T16:00:00.000Z", "business_end_date": "2018-03-19T16:00:00.000Z", "cooperative_start_date": "2018-02-24T16:00:00.000Z", "cooperative_end_date": "2018-03-22T16:00:00.000Z", "cardType": 20, "cardNo": "123", "type": 30, "name": "德玛下呀", "shortName": "德玛下呀", "code": "", "contactsList": [{ "utype": 20, "realName": "123", "mobile": "1231", "email": "123", "remark": "123", "admin": true, "index": 0 }], "fileIds": [5636] }
+const zcobj = { "province": 130000, "city": 130300, "area": 130304, "address": "12312", "regCapital": "1231", "email": "12323", "businessStartDate": "2018-03-12T16:00:00.000Z", "businessEndDate": "2018-03-19T16:00:00.000Z", "cooperativeStartDate": "2018-02-24T16:00:00.000Z", "cooperativeEndDate": "2018-03-22T16:00:00.000Z", "cardType": 20, "cardNo": "123", "type": 30, "name": "德玛下呀", "code": "", "contactsList": [{ "realName": "123", "mobile": "1231", "email": "123", "remark": "123", "admin": true, "index": 0 }], "fileIds": [5636] }
 const dictionary = {
   zh_CN: {
     custom: {
@@ -249,16 +231,16 @@ const dictionary = {
       cardType: {
         required: () => '请选择证件类型'
       },
-      business_start_date: {
+      businessStartDate: {
         required: () => '请选择营业起始日'
       },
-      business_end_date: {
+      businessEndDate: {
         required: () => '请选择营业到期日',
       },
-      cooperative_start_date: {
+      cooperativeStartDate: {
         required: () => '请选择合作开始日'
       },
-      cooperative_end_date: {
+      cooperativeEndDate: {
         required: () => '请选择合作到期日'
       },
       addressValidate: {
@@ -266,13 +248,10 @@ const dictionary = {
       }
     },
     messages: {
-      lender: {
-        // type: () => '请选择类型',
-      }
+
     },
     attributes: {
-      name: '资方名称',
-      shortName: '资方简称',
+      name: '担保方名称',
       type: '公司类型',
       cardType: '证件类型',
       cardNo: '证件类型号码',
@@ -305,7 +284,6 @@ export default {
       pageCode: '',
       onlyCheck: false,
       attachments: [],
-      lender: {}
     }
   },
   created() {
@@ -313,12 +291,11 @@ export default {
     this.addIndex()
   },
   mounted() {
-    this.$store.dispatch('getLenderListCode', { code: this.$route.query.code })
+    this.$store.dispatch('getGuarantorListCode', { code: this.$route.query.code })
   },
   methods: {
     changedate() {
       //日期变化
-      // console.log(this.form.lender.business_start_date)
     },
     changeSelect(data) {
       //三级联动校验赋值
@@ -337,7 +314,6 @@ export default {
       console.log(this.form)
       if (!this.form.contactsList) {
         this.form.contactsList = [{
-          utype: '',
           realName: '',
           mobile: '',
           email: '',
@@ -346,7 +322,6 @@ export default {
         }]
       } else {
         this.form.contactsList.push({
-          utype: '',
           realName: '',
           mobile: '',
           email: '',
@@ -393,9 +368,10 @@ export default {
       let self = this,
         id = response.data.id;
 
-      if (!this.form.fileIds || !(id in this.form.fileIds)) {
-        this.form.fileIds.push(id) || (this.form.fileIds = new Array(id))
+      if (!this.form.fileIds) {
+        this.form.fileIds = new Array()
       }
+      this.form.fileIds.push(id)
       this.uploadimgs = this.form.fileIds
       return false
       fileList.map(function(i, e) {
@@ -415,8 +391,8 @@ export default {
           if (this.addressValidate) {
             [this.form.province, this.form.city, this.form.area] = this.addressValidate
           }
-          this.$store.dispatch('putLender', this.form);
-          let url = '/lender/list'
+          this.$store.dispatch('putGuarantor', this.form);
+          let url = '/guarantor/list'
           this.$router.push(url)
           return;
         }
@@ -440,7 +416,7 @@ export default {
     }
   },
   computed: mapState({
-    form: state => state.lender.lists
+    form: state => state.guarantor.lists
   }),
   beforeCreate() {},
   components: {

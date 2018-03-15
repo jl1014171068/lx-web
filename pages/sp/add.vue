@@ -7,24 +7,18 @@
         <div slot='con'>
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方编码" for="lender.code">
-                <el-input :disabled="true" v-model="form.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
+              <el-form-item label="担保方编码" for="code">
+                <el-input :disabled="true" v-model="form.code" name="code" type="text" placeholder="担保方编码"></el-input>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方名称" for="name" :class="{ 'vee-control': true }">
-                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
+              <el-form-item label="担保方名称" for="name" :class="{ 'vee-control': true }">
+                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="担保方名称"></el-input>
                 <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方简称" for="shortName" :class="{ 'vee-control': true }">
-                <el-input v-model="form.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('shortName') }" name="shortName" type="text" placeholder="资方简称"></el-input>
-                <span v-show="errors.has('shortName')" class="help is-danger">{{ errors.first('shortName') }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="公司类型" for="type" :class="{ 'vee-control': true }">
+              <el-form-item label="类型" for="type" :class="{ 'vee-control': true }">
                 <el-select clearable v-model="form.type" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type') }" name="type">
                   <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
@@ -79,6 +73,14 @@
               <el-form-item label="注册资本(万美金)" for="regCapital" :class="{ 'vee-control': true }">
                 <el-input v-model="form.regCapital" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('regCapital') }" name="regCapital" type="text" placeholder="注册资本(万美金)"></el-input>
                 <span v-show="errors.has('regCapital')" class="help is-danger">{{ errors.first('regCapital') }}</span>
+              </el-form-item>
+            </el-col>
+             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="进件类型" for="loanType" :class="{ 'vee-control': true }">
+                <el-select clearable v-model="form.loanType" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('loanType') }" name="loanType">
+                  <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+                <span v-show="errors.has('loanType')" class="help is-danger">{{ errors.first('loanType') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" class='pch-area'>
@@ -187,7 +189,7 @@
             <el-upload :action="uploadImgurl" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :show-file-list='true' :multiple='true' :auto-upload='true' :on-success='uploadSuccess' :file-list='attachments'>
               <i class="el-icon-plus"></i>
             </el-upload>
-            <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="uploadimgs">
+            <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('uploadimgs') }" name="uploadimgs">
             <span v-show="errors.has('uploadimgs')" class="help is-danger">至少上传一张营业执照</span>
           </div>
           <el-dialog :visible.sync="dialogVisible">
@@ -218,7 +220,7 @@
   </div>
 </template>
 <style lang="scss">
-@import "./lender.scss"
+@import "./sp.scss"
 
 </style>
 <script>
@@ -237,9 +239,9 @@ if (process.browser) {
   Vue.use(Distpicker)
   Vue.component('v-distpicker', Distpicker)
 }
-const obj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","businessStartDate":"2018-03-12","businessEndDate":"2018-03-19","cooperativeStartDate":"2018-02-24","cooperativeEndDate":"2018-03-22","cardType":20,"cardNo":"123","type":30,"name":"3123313123","shortName":"231123123123","code":"","fileIds":[5636]}
+const obj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","businessStartDate":"2018-03-12","businessEndDate":"2018-03-19","cooperativeStartDate":"2018-02-24","cooperativeEndDate":"2018-03-22","cardType":20,"cardNo":"123","type":30,"name":"3123313123","code":"","fileIds":[5636]}
 
-const zcobj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","businessStartDate":"2018-03-12T16:00:00.000Z","businessEndDate":"2018-03-19T16:00:00.000Z","cooperativeStartDate":"2018-02-24T16:00:00.000Z","cooperativeEndDate":"2018-03-22T16:00:00.000Z","cardType":20,"cardNo":"123","type":30,"name":"额 sad sad","shortName":"额 sad sad","code":"","contactsList":[{"utype":20,"realName":"123","mobile":"1231","email":"123","remark":"123","admin":true,"index":0}],"fileIds":[5636]}
+const zcobj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","businessStartDate":"2018-03-12T16:00:00.000Z","businessEndDate":"2018-03-19T16:00:00.000Z","cooperativeStartDate":"2018-02-24T16:00:00.000Z","cooperativeEndDate":"2018-03-22T16:00:00.000Z","cardType":20,"cardNo":"123","type":30,"name":"额 sad sad","code":"","contactsList":[{"utype":20,"realName":"123","mobile":"1231","email":"123","remark":"123","admin":true,"index":0}],"fileIds":[5636]}
 const dictionary = {
   zh_CN: {
     custom: {
@@ -263,6 +265,9 @@ const dictionary = {
       },
       addressValidate: {
         required: () => '请选择注册地址'
+      },
+      loanType: {
+        required: () => '请选择进件类型'
       }
     },
     messages: {
@@ -271,9 +276,9 @@ const dictionary = {
       }
     },
     attributes: {
-      name: '资方名称',
-      shortName: '资方简称',
-      type: '公司类型',
+      name: '担保方名称',
+      type: '类型',
+      loanType: '进件类型',
       cardType: '证件类型',
       cardNo: '证件类型号码',
       email: '电子邮件',
@@ -319,7 +324,6 @@ export default {
         cardNo: '',
         type: '',
         name: '',
-        shortName: '',
         code: '',
         contactsList: [{
           utype: '',
@@ -332,28 +336,20 @@ export default {
         fileIds: []
       },
       attachments: [],
-      lender: {}
     }
   },
   created() {
     this.page = this.$route.query.page
     this.addIndex()
   },
-  mounted() {
-    // this.$store.dispatch('getLenderListCode', { code: this.$route.query.code })
-    /*  this.$nextTick(() => {
-        let result = this.$store.state.lender.lists
-        console.log(result)
-        this.form = result
-      })*/
-  },
+  mounted() {},
   methods: {
     changedate() {
       //日期变化
-      // console.log(this.form.lender.businessStartDate)
     },
     changeSelect(data) {
       //三级联动校验赋值
+      console.log(data)
       this.addressValidate = [parseInt(data.province.code), parseInt(data.city.code), parseInt(data.area.code)]
     },
     addIndex() {
@@ -429,8 +425,8 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           [this.form.province, this.form.city, this.form.area] = this.addressValidate
-          this.$store.dispatch('postLenderAdd', this.form);
-          let url = '/lender/list'
+          this.$store.dispatch('postSprAdd', this.form);
+          let url = '/sp/list'
           this.$router.push(url)
           return;
         }
@@ -452,14 +448,6 @@ export default {
         dangerouslyUseHTMLString: true
       });
     }
-  },
-  computed: {
-    rednerForm() {
-      console.log(this.$store.state.lender.lists)
-      // this.form  =  this.$store.state.lender.lists
-      return this.$store.state.lender.lists
-    }
-    // form: state => state.lender.lists
   },
   beforeCreate() {},
   components: {

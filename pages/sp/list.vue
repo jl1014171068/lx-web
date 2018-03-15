@@ -1,9 +1,8 @@
 <template>
   <div>
-    <elTablePage :params="params" url="/lender/getInfoList">
-      <el-table-column prop="code" width="250" label="资金方编码"></el-table-column>
-      <el-table-column prop="name" width="250" label="资金方名称"></el-table-column>
-      <el-table-column prop="shortName" width="250" label="简称"></el-table-column>
+    <elTablePage :params="params" url="/sp/getInfoList">
+      <el-table-column prop="code" width="250" label="SP编码"></el-table-column>
+      <el-table-column prop="name" width="250" label="SP名称"></el-table-column>
       <el-table-column prop="type" width="250" label="类型"></el-table-column>
       <el-table-column prop="businessStartDate" width="250" label="营业起始日"></el-table-column>
       <el-table-column prop="businessEndDate" width="250" label="营业到期日"></el-table-column>
@@ -37,7 +36,7 @@
   </div>
 </template>
 <style lang="scss">
-@import "./lender.scss"
+@import "./sp.scss"
 
 </style>
 <script>
@@ -61,10 +60,10 @@ export default {
     lookDetail(row, action) {
       let url;
       if (action == 'look') {
-        url = "/lender/detail/" + row.code
+        url = "/sp/detail/" + row.code
         this.$router.push(url)
       } else if (action == 'update') {
-        url = "/lender/update?code=" + row.code
+        url = "/sp/update?code=" + row.code
         this.$router.push(url)
       } else {
         this.showModal()

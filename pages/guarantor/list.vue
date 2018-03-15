@@ -1,8 +1,8 @@
 <template>
   <div>
-    <elTablePage :params="params" url="/lender/getInfoList">
+    <elTablePage :params="params" url="/guarantor/getInfoList">
       <el-table-column prop="code" width="250" label="资金方编码"></el-table-column>
-      <el-table-column prop="name" width="250" label="资金方名称"></el-table-column>
+      <el-table-column prop="name" width="250" label="公司名称"></el-table-column>
       <el-table-column prop="shortName" width="250" label="简称"></el-table-column>
       <el-table-column prop="type" width="250" label="类型"></el-table-column>
       <el-table-column prop="businessStartDate" width="250" label="营业起始日"></el-table-column>
@@ -26,8 +26,8 @@
         <el-form class='pch-form' ref="form" :inline="true" label-position="right" label-width='130px'>
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方编码" for="lender.code">
-                <el-input :disabled="true" v-model="form.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
+              <el-form-item label="资方编码" for="id">
+                <el-input :disabled="true" v-model="id" name="id" type="text" placeholder="资方编码"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -50,7 +50,8 @@ export default {
   created() {},
   data() {
     return {
-      params: {}
+      params: {},
+      id:''
     }
   },
   computed: mapState({
@@ -60,10 +61,11 @@ export default {
     lookDetail(row, action) {
       let url;
       if (action == 'look') {
-        url = "/lender/detail/" + row.code
-
+        url = "/guarantor/detail/" + row.code
+        this.$router.push(url)
       } else if (action == 'update') {
-        url = "/lender/update?code=" + row.code
+        url = "/guarantor/update?code=" + row.code
+        this.$router.push(url)
       } else {
         this.showModal()
       }

@@ -7,20 +7,14 @@
         <div slot='con'>
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方编码" for="lender.code">
-                <el-input :disabled="true" v-model="form.code" name="lender.code" type="text" placeholder="资方编码"></el-input>
+              <el-form-item label="担保方编码" for="code">
+                <el-input :disabled="true" v-model="form.code" name="code" type="text" placeholder="担保方编码"></el-input>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方名称" for="name" :class="{ 'vee-control': true }">
-                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="资方名称"></el-input>
+              <el-form-item label="担保方名称" for="name" :class="{ 'vee-control': true }">
+                <el-input v-model="form.name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('name') }" name="name" type="text" placeholder="担保方名称"></el-input>
                 <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-              <el-form-item label="资方简称" for="shortName" :class="{ 'vee-control': true }">
-                <el-input v-model="form.shortName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('shortName') }" name="shortName" type="text" placeholder="资方简称"></el-input>
-                <span v-show="errors.has('shortName')" class="help is-danger">{{ errors.first('shortName') }}</span>
               </el-form-item>
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
@@ -81,6 +75,14 @@
                 <span v-show="errors.has('regCapital')" class="help is-danger">{{ errors.first('regCapital') }}</span>
               </el-form-item>
             </el-col>
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="进件类型" for="loanType" :class="{ 'vee-control': true }">
+                <el-select clearable v-model="form.loanType" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('loanType') }" name="loanType">
+                  <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+                <span v-show="errors.has('loanType')" class="help is-danger">{{ errors.first('loanType') }}</span>
+              </el-form-item>
+            </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" class='pch-area'>
               <el-form-item label="注册地址" for="addressValidate" :class="{ 'vee-control': true }">
                 <no-ssr>
@@ -96,8 +98,6 @@
                 <span v-show="errors.has('address')" class="help is-danger">详细注册地址不能为空</span>
               </el-form-item>
             </el-col>
-            <!--    <input placeholder="请输入手机号" v-validate="'required'" :name="`lender.contactsList${form.ccc}.utype`" v-model="form.address">
-            <span v-show="errors.has(`lender.contactsList${form.ccc}.utype`)" class="errors-tip is-danger">不能为空</span> -->
           </el-row>
         </div>
       </titleField>
@@ -105,16 +105,6 @@
         <h1 slot='title' class="leg-text">联系人信息</h1>
         <div slot='con'>
           <el-table :data="form.contactsList" style="width: 100%" class='pch-table' stripe>
-            <el-table-column prop="utype" label="联系人类型" width="250">
-              <template slot-scope="scope">
-                <div :class="{ 'vee-control': true }">
-                  <el-select clearable v-model="scope.row.utype" placeholder="请选择" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.utype`) }" :name="`form.contactsList${scope.row.index}.utype`">
-                    <el-option v-for="list in typeOption" :key="list.value" :label="list.label" :value="list.value"></el-option>
-                  </el-select>
-                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.utype`)">请选择联系人类型</span>
-                </div>
-              </template>
-            </el-table-column>
             <el-table-column prop="realName" label="姓名" width="250">
               <template slot-scope="scope">
                 <div :class="{ 'vee-control': true }">
@@ -187,7 +177,7 @@
             <el-upload :action="uploadImgurl" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :show-file-list='true' :multiple='true' :auto-upload='true' :on-success='uploadSuccess' :file-list='attachments'>
               <i class="el-icon-plus"></i>
             </el-upload>
-            <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('lender.area') }" name="uploadimgs">
+            <input type="hidden" v-model="uploadimgs" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('uploadimgs') }" name="uploadimgs">
             <span v-show="errors.has('uploadimgs')" class="help is-danger">至少上传一张营业执照</span>
           </div>
           <el-dialog :visible.sync="dialogVisible">
@@ -218,7 +208,7 @@
   </div>
 </template>
 <style lang="scss">
-@import "./lender.scss"
+@import "./sp.scss"
 
 </style>
 <script>
@@ -237,9 +227,9 @@ if (process.browser) {
   Vue.use(Distpicker)
   Vue.component('v-distpicker', Distpicker)
 }
-const obj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","businessStartDate":"2018-03-12","businessEndDate":"2018-03-19","cooperativeStartDate":"2018-02-24","cooperativeEndDate":"2018-03-22","cardType":20,"cardNo":"123","type":30,"name":"3123313123","shortName":"231123123123","code":"","fileIds":[5636]}
+const obj = { "province": 130000, "city": 130300, "area": 130304, "address": "12312", "regCapital": "1231", "email": "12323", "businessStartDate": "2018-03-12", "businessEndDate": "2018-03-19", "cooperativeStartDate": "2018-02-24", "cooperativeEndDate": "2018-03-22", "cardType": 20, "cardNo": "123", "type": 30, "name": "3123313123", "code": "", "fileIds": [5636] }
 
-const zcobj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","businessStartDate":"2018-03-12T16:00:00.000Z","businessEndDate":"2018-03-19T16:00:00.000Z","cooperativeStartDate":"2018-02-24T16:00:00.000Z","cooperativeEndDate":"2018-03-22T16:00:00.000Z","cardType":20,"cardNo":"123","type":30,"name":"额 sad sad","shortName":"额 sad sad","code":"","contactsList":[{"utype":20,"realName":"123","mobile":"1231","email":"123","remark":"123","admin":true,"index":0}],"fileIds":[5636]}
+const zcobj = { "province": 130000, "city": 130300, "area": 130304, "address": "12312", "regCapital": "1231", "email": "12323", "businessStartDate": "2018-03-12T16:00:00.000Z", "businessEndDate": "2018-03-19T16:00:00.000Z", "cooperativeStartDate": "2018-02-24T16:00:00.000Z", "cooperativeEndDate": "2018-03-22T16:00:00.000Z", "cardType": 20, "cardNo": "123", "type": 30, "name": "德玛下呀", "code": "", "contactsList": [{ "realName": "123", "mobile": "1231", "email": "123", "remark": "123", "admin": true, "index": 0 }], "fileIds": [5636] }
 const dictionary = {
   zh_CN: {
     custom: {
@@ -263,18 +253,19 @@ const dictionary = {
       },
       addressValidate: {
         required: () => '请选择注册地址'
+      },
+      loanType: {
+        required: () => '请选择进件类型'
       }
     },
     messages: {
-      lender: {
-        // type: () => '请选择类型',
-      }
+
     },
     attributes: {
-      name: '资方名称',
-      shortName: '资方简称',
+      name: '担保方名称',
       type: '公司类型',
       cardType: '证件类型',
+      loanType: '进件类型',
       cardNo: '证件类型号码',
       email: '电子邮件',
       regCapital: '注册资本(万美金)',
@@ -304,35 +295,7 @@ export default {
       page: '',
       pageCode: '',
       onlyCheck: false,
-      form: {
-        province: '',
-        city: '',
-        area: '',
-        address: '',
-        regCapital: '',
-        email: '',
-        businessStartDate: '',
-        businessEndDate: '',
-        cooperativeStartDate: '',
-        cooperativeEndDate: '',
-        cardType: '',
-        cardNo: '',
-        type: '',
-        name: '',
-        shortName: '',
-        code: '',
-        contactsList: [{
-          utype: '',
-          realName: '',
-          mobile: '',
-          email: '',
-          remark: '',
-          admin: false
-        }],
-        fileIds: []
-      },
       attachments: [],
-      lender: {}
     }
   },
   created() {
@@ -340,17 +303,11 @@ export default {
     this.addIndex()
   },
   mounted() {
-    // this.$store.dispatch('getLenderListCode', { code: this.$route.query.code })
-    /*  this.$nextTick(() => {
-        let result = this.$store.state.lender.lists
-        console.log(result)
-        this.form = result
-      })*/
+    this.$store.dispatch('getSpListCode', { code: this.$route.query.code })
   },
   methods: {
     changedate() {
       //日期变化
-      // console.log(this.form.lender.businessStartDate)
     },
     changeSelect(data) {
       //三级联动校验赋值
@@ -366,14 +323,25 @@ export default {
     },
     addRow() {
       //新增一行
-      this.form.contactsList.push({
-        utype: '',
-        realName: '',
-        mobile: '',
-        email: '',
-        remark: '',
-        admin: false
-      })
+      console.log(this.form)
+      if (!this.form.contactsList) {
+        this.form.contactsList = [{
+          realName: '',
+          mobile: '',
+          email: '',
+          remark: '',
+          admin: false
+        }]
+      } else {
+        this.form.contactsList.push({
+          realName: '',
+          mobile: '',
+          email: '',
+          remark: '',
+          admin: false
+        })
+      }
+
       this.addIndex()
     },
     removeRow(data) {
@@ -411,7 +379,11 @@ export default {
       //上传成功
       let self = this,
         id = response.data.id;
-      !(id in this.form.fileIds) ? this.form.fileIds.push(id): ''
+
+      if (!this.form.fileIds) {
+        this.form.fileIds = new Array()
+      }
+      this.form.fileIds.push(id)
       this.uploadimgs = this.form.fileIds
       return false
       fileList.map(function(i, e) {
@@ -428,9 +400,11 @@ export default {
       // zcobj
       this.$validator.validateAll().then((result) => {
         if (result) {
-          [this.form.province, this.form.city, this.form.area] = this.addressValidate
-          this.$store.dispatch('postLenderAdd', this.form);
-          let url = '/lender/list'
+          if (this.addressValidate) {
+            [this.form.province, this.form.city, this.form.area] = this.addressValidate
+          }
+          this.$store.dispatch('putSp', this.form);
+          let url = '/sp/list'
           this.$router.push(url)
           return;
         }
@@ -453,14 +427,9 @@ export default {
       });
     }
   },
-  computed: {
-    rednerForm() {
-      console.log(this.$store.state.lender.lists)
-      // this.form  =  this.$store.state.lender.lists
-      return this.$store.state.lender.lists
-    }
-    // form: state => state.lender.lists
-  },
+  computed: mapState({
+    form: state => state.sp.lists
+  }),
   beforeCreate() {},
   components: {
     titleField,

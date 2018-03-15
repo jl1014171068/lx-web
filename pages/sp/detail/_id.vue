@@ -97,8 +97,8 @@ export default {
   data() {
     return {
       detail: {
-        code: "担保方编码",
-        name: "担保方名称",
+        code: "SP编码",
+        name: "SP名称",
         type: "类型",
         cardType: "证件类型",
         cardNo: "证件号码",
@@ -110,15 +110,20 @@ export default {
         regCapital: "资产资本（万美元）",
         undefined: "法人",
         province: "注册地址",
+        loanType:"进件类型"
       }
     }
   },
   computed: mapState({
     // 映射 this.count 为 store.state.count
-    form: state => state.guarantor.lists
+    form: state => state.sp.lists
   }),
   created() {
-    this.$store.dispatch('getGuarantorDetail', this.$route.params.id)
+    console.log(this.$route.params)
+    // console.log(params)
+    // console.log(this.$route.query.code)
+    // console.log(params)
+    this.$store.dispatch('getSpDetail', this.$route.params.id)
   },
   components: {
     titleField
