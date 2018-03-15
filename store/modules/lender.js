@@ -36,8 +36,24 @@ export default {
     },
   },
   actions: {
+    getLenderListCode({ commit }, parames) {
+      api.fetchLenderList(parames).then((res) => {
+        let result = res.data[0];
+        // if()
+        commit(types.LENDER_LIST, result)
+      })
+    },
     getLenderList({ commit }, parames) {
-      api.fetchLenderList().then((res) => {
+      api.fetchLenderList(parames).then((res) => {
+        // {
+        //   utype: '',
+        //   uname: '',
+        //   mobile: '',
+        //   email: '',
+        //   bak: '',
+        //   admin: false
+        // }
+        console.log(res.data)
         commit(types.LENDER_LIST, res.data)
       })
     },

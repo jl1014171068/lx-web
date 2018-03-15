@@ -17,7 +17,6 @@ import guarantor from './modules/guarantor';
 import sp from './modules/sp';
 
 
-
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
@@ -36,5 +35,5 @@ const store = () => {
   })
 }
 
-
+export  const  strict  =  false
 export default store

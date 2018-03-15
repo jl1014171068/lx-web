@@ -3,7 +3,6 @@ const api = {
   // 资方列表
   async fetchLenderList(params) {
     let { data } = await request.get('/lender/getInfoList',params)
-    console.log(data)
     return data
   },
   // 资方开户

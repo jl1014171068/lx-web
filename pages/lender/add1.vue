@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form class='pch-form' ref="form" :inline="true" label-position="right" label-width='130px'>
+    <el-form class='pch-form' ref="form" :inline="true"  label-position="right" label-width='130px'>
       <!-- <el-form ref="form" :inline="true" :model="form" label-position="right" @submit.prevent="validateBeforeSubmit"> -->
       <titleField>
         <h1 slot='title' class="leg-text">开户</h1>
@@ -115,11 +115,11 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="realName" label="姓名" width="250">
+            <el-table-column prop="uname" label="姓名" width="250">
               <template slot-scope="scope">
                 <div :class="{ 'vee-control': true }">
-                  <el-input v-model="scope.row.realName" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.realName`) }" :name="`form.contactsList${scope.row.index}.realName`"></el-input>
-                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.realName`)">请输入姓名</span>
+                  <el-input v-model="scope.row.uname" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.uname`) }" :name="`form.contactsList${scope.row.index}.uname`"></el-input>
+                  <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.uname`)">请输入姓名</span>
                 </div>
               </template>
             </el-table-column>
@@ -135,10 +135,10 @@
                 <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.email`)">请输入电子邮箱</span>
               </template>
             </el-table-column>
-            <el-table-column prop="remark" label="备注" width="250">
+            <el-table-column prop="bak" label="备注" width="250">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.remark" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.remark`) }" :name="`form.contactsList${scope.row.index}.remark`"></el-input>
-                <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.remark`)">请输入备注</span>
+                <el-input v-model="scope.row.bak" placeholder="请输入内容" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(`form.contactsList${scope.row.index}.bak`) }" :name="`form.contactsList${scope.row.index}.bak`"></el-input>
+                <span class="help is-danger" v-show="errors.has(`form.contactsList${scope.row.index}.bak`)">请输入备注</span>
               </template>
             </el-table-column>
             <el-table-column prop="name" label="是否设置管理员" width="250">
@@ -165,7 +165,7 @@
           <el-row :gutter="24">
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="手机号码" for="phone" :class="{ 'vee-control': true }">
-                <el-input placeholder="请输入内容" v-model="user.phone" class="input-with-select" v-validate="'required|mobile'" :class="{'input': true, 'is-danger': errors.has('phone') }" name='phone'>
+                <el-input placeholder="请输入内容" v-model="form.lender.phone" class="input-with-select" v-validate="'required|mobile'" :class="{'input': true, 'is-danger': errors.has('phone') }" name='phone'>
                   <el-button slot="append" icon="el-icon-search" @click='searchAdmin'></el-button>
                 </el-input>
                 <span v-show="errors.has('phone')" class="help is-danger">{{ errors.first('phone') }}</span>
@@ -173,7 +173,7 @@
             </el-col>
             <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
               <el-form-item label="姓名" for="adname" :class="{ 'vee-control': true }">
-                <el-input v-model="user.adname" disabled v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('adname') }" name="adname" type="text" placeholder="姓名"></el-input>
+                <el-input v-model="form.lender.adname" disabled v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('adname') }" name="adname" type="text" placeholder="姓名"></el-input>
                 <span v-show="errors.has('adname')" class="help is-danger">请输入姓名</span>
               </el-form-item>
             </el-col>
@@ -231,9 +231,8 @@ import Vue from 'vue'
 import titleField from '~/components/common/title-field/title-field'
 import formGenerators from '~/components/common/vue-generators/vue-generators'
 import { Validator } from 'vee-validate'
-import { API_SERVER,UPLOAD_SERVER } from '~/config/config'
-import { mapState } from 'vuex'
-import defaultOption from '~/config/options'
+import { API_SERVER } from '~/config/config'
+import { mapState } from 'vuex';
 
 let vm = new Vue()
 
@@ -289,24 +288,55 @@ const dictionary = {
 
 Validator.localize(dictionary);
 
+
 export default {
   data() {
     return {
-      typeOption: defaultOption.select,
-      placeholders: defaultOption.placeholders,
-      formData: defaultOption.formData,
-      addressValidate: '',
-      user: {
-        phone: '',
-        adname: ''
-      },
-      uploadImgurl: UPLOAD_SERVER,
-      uploadimgs: '',
+      
+   
+   
+      tableData: [{
+        date: '2016-05-03',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-02',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }],
       dialogImageUrl: '',
       dialogVisible: false,
+      placeholders: {
+        province: '请选择省',
+        city: '请选择城市',
+        area: '请选择区',
+      },
+      onlyCheck: false,
+      uploadImgurl: API_SERVER + '/audit/todo/loanupload',
+      uploadimgs: '',
+      // area: '',
       page: '',
-      pageCode: '',
-      onlyCheck:false,
+      pageCode:'',
       form: {
         province: '',
         city: '',
@@ -328,104 +358,35 @@ export default {
         adname: '',
         contactsList: [{
           utype: '',
-          realName: '',
+          uname: '',
           mobile: '',
           email: '',
-          remark: '',
+          bak: '',
           admin: false
         }],
-        fileIds:[],
         attachments: [],
-        lender: {}
+        lender: {
+
+        }
       }
     }
   },
   created() {
-    this.form.code = this.$route.query.code
+    this.pageCode = this.$route.query.code
     this.page = this.$route.query.page
     this.addIndex()
+    this.initFrom()
+    // console.log(this.$modal)
+    // this.open5();
   },
-  mounted() {
-    // this.$store.dispatch('getLenderListCode', { code: this.$route.query.code })
-    /*  this.$nextTick(() => {
-        let result = this.$store.state.lender.lists
-        console.log(result)
-        this.form = result
-      })*/
-  },
+  mounted() {},
   methods: {
-    changedate() {
-      //日期变化
-      // console.log(this.form.lender.business_start_date)
-    },
-    changeSelect(data) {
-      //三级联动校验赋值
-      this.addressValidate = data.area.value
-    },
-    addIndex() {
-      //添加index用作name动态
-      if (!this.form.contactsList) return false
-      this.form.contactsList.map(function(el, ind) {
-        if (el.index) delete el.index;
-        return el.index = ind
-      })
-    },
-    addRow() {
-      //新增一行
-      this.form.contactsList.push({
-        utype: '',
-        realName: '',
-        mobile: '',
-        email: '',
-        remark: '',
-        admin: false
-      })
-      this.addIndex()
-    },
-    removeRow(data) {
-      //删除行
-      let index = data.$index,
-        row = data.row;
-      this.form.contactsList.splice(index, 1)
-    },
-    addAdmin(data) {
-      //设置管理员
-      let index = data.$index,
-        row = data.row;
-      this.onlyCheck = row.admin
-    },
-    searchAdmin() {
-      this.$modal.show('hello-world');
-    },
-    handleRemove(file, fileList) {
-      // console.log(file, fileList);
-    },
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    uploadSuccess(response, file, fileList) {
-      //上传成功
-      let self = this;
-      fileList.map(function(i, e) {
-        self.form.attachments.push({
-          location: response.fileUrl,
-          name: response.filename,
-          type: response.fileType,
-          size: i.size,
-          fileName: '营业执照'
-        })
-      })
-    },
     onSubmit() {
+      if (this.page === 'look') {
 
-       this.$store.dispatch('postLenderAdd', this.form);
-
-      // if (this.page === 'look') {
-
-      // } else if (this.page === 'update') {
-      //   this.$store.dispatch('putLender', this.form);
-      // }
+      } else if (this.page === 'update') {
+        this.$store.dispatch('putLender', this.form);
+      }
       return false;
       this.$validator.validateAll().then((result) => {
         if (result) {
@@ -436,6 +397,79 @@ export default {
         }
         console.log('咋啦');
       });
+    },
+    removeRow(data) {
+      //删除行
+      let index = data.$index,
+        row = data.row;
+      this.form.contactsList.splice(index, 1)
+    },
+    changeSelect(data) {
+      //三级联动校验赋值
+      this.form.province = data.province.value
+      this.form.city = data.city.value
+      this.form.area = data.area.value
+    },
+    handleRemove(file, fileList) {
+      // console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      console.log(file)
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    addIndex() {
+      //添加index用作name动态
+      // this.form.contactsList.map(function(el, ind) {
+      //   if (el.index) delete el.index;
+      //   return el.index = ind
+      // })
+    },
+    addRow() {
+      this.form.contactsList.push({
+        utype: '',
+        uname: '',
+        mobile: '',
+        email: '',
+        bak: '',
+        admin: false
+      })
+      this.addIndex()
+    },
+    addAdmin(data) {
+      //设置管理员
+      let index = data.$index,
+        row = data.row;
+      this.onlyCheck = row.admin
+    },
+    uploadSuccess(response, file, fileList) {
+      //上传成功
+      var self = this;
+      fileList.map(function(i, e) {
+        self.form.attachments.push({
+          location: response.fileUrl,
+          name: response.filename,
+          type: response.fileType,
+          size: i.size,
+          fileName: '营业执照'
+        })
+      })
+    },
+    searchAdmin() {
+      this.$modal.show('hello-world');
+
+      // this.$validator.validateAll('adminphone').then((result) => {
+      //   if (!result) {
+      //     this.$message({
+      //       message: '请输入正确的手机号码！',
+      //       type: 'warning'
+      //     });
+      //   }
+      // });
+      // console.log(this.form.lender.phone)
+    },
+    changedate() {
+      console.log(this.form.lender.business_start_date)
     },
     showModal() {
       this.$modal.show('hello-world');
@@ -452,20 +486,27 @@ export default {
       this.$alert(`<b>111</b>`, '这是标题？', {
         dangerouslyUseHTMLString: true
       });
+    },
+    initFrom() {
+      if (this.page === 'update') {
+        this.$store.dispatch('getLenderListCode', { code: this.pageCode })
+        console.log(this.$store.state.lender.lists)
+        // this.form = this.$store.state.lender.lists
+      }
     }
   },
-  computed: {
-    rednerForm() {
-      console.log(this.$store.state.lender.lists)
-      // this.form  =  this.$store.state.lender.lists
-      return this.$store.state.lender.lists
-    }
-    // form: state => state.lender.lists
-  },
-  beforeCreate() {},
+  computed: mapState({
+    form: state => state.lender.lists[0]
+  }),
   components: {
     titleField,
     formGenerators
+  },
+  watch: {
+    'form.attachments' (news, old) {
+      if (news.length) this.uploadimgs = news.length
+      else this.uploadimgs = ''
+    }
   }
 }
 
