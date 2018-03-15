@@ -218,7 +218,7 @@
   </div>
 </template>
 <style lang="scss">
-@import "./lender.scss"
+@import "./guarantor.scss"
 
 </style>
 <script>

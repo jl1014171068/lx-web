@@ -5,10 +5,10 @@
       <el-table-column prop="name" width="250" label="资金方名称"></el-table-column>
       <el-table-column prop="shortName" width="250" label="简称"></el-table-column>
       <el-table-column prop="type" width="250" label="类型"></el-table-column>
-      <el-table-column prop="bussBegin" width="250" label="营业起始日"></el-table-column>
-      <el-table-column prop="bussEnd" width="250" label="营业到期日"></el-table-column>
-      <el-table-column prop="togeBegin" width="250" label="合作开始日"></el-table-column>
-      <el-table-column prop="togeEnd" width="250" label="合作到期日"></el-table-column>
+      <el-table-column prop="businessStartDate" width="250" label="营业起始日"></el-table-column>
+      <el-table-column prop="businessEndDate" width="250" label="营业到期日"></el-table-column>
+      <el-table-column prop="cooperativeStartDate" width="250" label="合作开始日"></el-table-column>
+      <el-table-column prop="cooperativeEndDate" width="250" label="合作到期日"></el-table-column>
       <el-table-column prop="address" width="250" label="注册地址"></el-table-column>
       <el-table-column prop="regCapital" width="250" label="注册资本(万美金)"></el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
@@ -19,6 +19,21 @@
         </template>
       </el-table-column>
     </elTablePage>
+    <!-- 担保方绑定 -->
+    <no-ssr>
+      <modal name="bind-way" width="800px" height="auto" class='pch-form-modal' :clickToClose="false">
+        <h3 class="pch-modal-title">绑定担保方</h3>
+        <el-form class='pch-form' ref="form" :inline="true" label-position="right" label-width='130px'>
+          <el-row :gutter="24">
+            <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+              <el-form-item label="资方编码" for="id">
+                <el-input :disabled="true" v-model="id" name="id" type="text" placeholder="资方编码"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </modal>
+    </no-ssr>
   </div>
 </template>
 <style lang="scss">
@@ -35,7 +50,8 @@ export default {
   created() {},
   data() {
     return {
-      params: {}
+      params: {},
+      id:''
     }
   },
   computed: mapState({
@@ -49,15 +65,13 @@ export default {
 
       } else if (action == 'update') {
         url = "/lender/update?code=" + row.code
+      } else {
+        this.showModal()
       }
-      this.$router.push(url)
-      return false;
-      // if (row.myTask.status == 'todo') {
-      // let url = "/lender/add?code=" + row.code
-      this.$router.push(url)
-      // }
-      // console.log(row.myTask);
-    }
+    },
+    showModal() {
+      this.$modal.show('bind-way');
+    },
   },
   mounted() {
     // this.$store.dispatch('getOuterApplyDetail',{page:1,limit:10});

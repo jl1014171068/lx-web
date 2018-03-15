@@ -39,7 +39,6 @@ export default {
       send.pageIndex = index || 1;
       send.pageSize = size || 20;
       let { data } = await request.get(this.url, this.params)
-      console.log(data)
       self.sourceData = data.data
       self.sourceTotal= data.data.length;
       // self.sourceTotal= data.total;

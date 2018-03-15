@@ -237,7 +237,9 @@ if (process.browser) {
   Vue.use(Distpicker)
   Vue.component('v-distpicker', Distpicker)
 }
+const obj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","business_start_date":"2018-03-12","business_end_date":"2018-03-19","cooperative_start_date":"2018-02-24","cooperative_end_date":"2018-03-22","cardType":20,"cardNo":"123","type":30,"name":"3123313123","shortName":"231123123123","code":"","fileIds":[5636]}
 
+const zcobj = {"province":130000,"city":130300,"area":130304,"address":"12312","regCapital":"1231","email":"12323","business_start_date":"2018-03-12T16:00:00.000Z","business_end_date":"2018-03-19T16:00:00.000Z","cooperative_start_date":"2018-02-24T16:00:00.000Z","cooperative_end_date":"2018-03-22T16:00:00.000Z","cardType":20,"cardNo":"123","type":30,"name":"额 sad sad","shortName":"额 sad sad","code":"","contactsList":[{"utype":20,"realName":"123","mobile":"1231","email":"123","remark":"123","admin":true,"index":0}],"fileIds":[5636]}
 const dictionary = {
   zh_CN: {
     custom: {
@@ -319,7 +321,6 @@ export default {
         name: '',
         shortName: '',
         code: '',
-        phone: '',
         contactsList: [{
           utype: '',
           realName: '',
@@ -353,13 +354,7 @@ export default {
     },
     changeSelect(data) {
       //三级联动校验赋值
-      this.addressValidate = data.area.value
-      if (data.province.code) {
-        this.form.province = parseInt(data.province.code)
-        this.form.city = parseInt(data.city.code)
-        this.form.area = parseInt(data.area.code)
-        console.log(this.form)
-      }
+      this.addressValidate = [parseInt(data.province.code), parseInt(data.city.code), parseInt(data.area.code)]
     },
     addIndex() {
       //添加index用作name动态
@@ -430,8 +425,10 @@ export default {
       })
     },
     onSubmit() {
+      // zcobj
       this.$validator.validateAll().then((result) => {
         if (result) {
+          [this.form.province, this.form.city, this.form.area] = this.addressValidate
           this.$store.dispatch('postLenderAdd', this.form);
           let url = '/lender/list'
           this.$router.push(url)
